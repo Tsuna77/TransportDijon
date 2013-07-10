@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Se déplacer à Dijon</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="refresh">Recharger les lignes</string>
+    <string name="reload">Rechargement en cours</string>
+    <string name="chose_this_line">Choisissez une ligne :</string>
+    <string name="cur_line">"Ligne choisie : "</string>
+    <string name="chose_station">Choisissez un arrêt :</string>
+    <string name="no_line_chose">Aucune ligne choisie</string>
+    <string name="Direction">Direction</string>
+    <string name="NC">NC</string>
+    <string name="temps_restant">Temps restant</string>
+    <string name="refresh_time">Actualiser</string>
+    <string name="Cant_connect">Impossible de se connecter au serveur</string>
+    <string name="no_station_selected">Aucun arrêt choisi</string>
+    <string name="error_in_work">Une erreur est survenue durant le traitement</string>
+    <string name="line_loading">Chargement des lignes</string>
+    <string name="station_loading">Chargement des arrêts</string>
+    <string name="time_loading">Chargement des horaires</string>
+    <string name="version">Version : </string>
+    <string name="updating">Mise à jour en cours</string>
+    <string name="stop_refreshing">Arrêt du rafraichissement automatique</string>
+    <string name="quit">Quitter</string>
+    <string name="bp_menu">Menu</string>
+
+</resources>
