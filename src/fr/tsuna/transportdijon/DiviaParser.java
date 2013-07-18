@@ -21,31 +21,31 @@ import android.util.Xml;
  * La class DiviaParser permet de récupérer les informations depuis l'api divia totem
  * disponible à l'adresse 84.55.151.139/relais
  * 
- * Les différentes fonction à appeler sont :
+ * Les différentes fonctioné appeler sont :
  * 
  * 
  */
 public class DiviaParser extends AsyncTask<Object, Object, Object> {
-	public static final String url_list_line="http://84.55.151.139/relais/217.php?xml=1";
-	public static final String url_list_horaire="http://84.55.151.139/relais/217.php?xml=3&ran=1";
+	public static final String url_list_line="http://timeo3.keolis.com/relais/217.php?xml=1";
+	public static final String url_list_horaire="http://timeo3.keolis.com/relais/217.php?xml=3&ran=1";
     private static final String ns = null;
     private static final String TAG = "TransportDijon";
     private static Context context= null;
 
-    private boolean isConnected(){
+    public boolean isConnected(){
     	boolean connected=false;
     	NetworkInfo info=null;
     	try{
     		info = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
     	}
     	catch(Exception e){
-    		myLog.write(TAG, "ERREUR : "+e.getMessage());
+    		myLog.write(TAG, "ERREUR : "+e.getMessage(),myLog.ERROR);
     	}
 		if (info != null && info.isConnected()){
 			connected=true;
 		}
 		
-		// ajout d'un bypass pour la montre Imwatch dont la valeur retourné est incorrect.
+		// ajout d'un bypass pour la montre Imwatch dont la valeur retourn� est incorrect.
 		if (android.os.Build.DEVICE.equals("Si14_imWatch")){
 			myLog.write(TAG,"Détection d'une Imwatch, activation du réseaux non détectable");
 			connected=true;
@@ -58,7 +58,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
     }
 	public List<Lignes> parseLine() throws XmlPullParserException, IOException{
 		if (!isConnected()){
-			throw new IOException("R�seaux de donn�e non disponible");
+			throw new IOException("Réseaux de donnée non disponible");
 		}
 		
 		
@@ -77,7 +77,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		}
     	catch (Exception e){
     		error_detected=true;
-    		myLog.write(TAG,"ERREUR get divia line list : "+e.getMessage());
+    		myLog.write(TAG,"ERREUR get divia line list : "+e.getMessage(),myLog.ERROR);
     	}
     	if (error_detected){
     		list_line.clear();
@@ -96,51 +96,50 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		}
 	}
 
-	public List<diviaHoraire> parser_horaire(diviaStation current_station) throws IOException{
+	public List<diviaHoraire> parser_horaire(String refs) throws IOException{
 		if (!isConnected()){
-			throw new IOException("Réseaux de donnée non disponible");
+			throw new IOException("R�seaux de donn�e non disponible");
 		}
 		List<diviaHoraire> list_horaire = new ArrayList<diviaHoraire>();
 		Boolean erreur = false;
 		URLConnection urlconnect=null;
 		InputStream result=null;
-		
+
 		String tmp_heure="";
 		String tmp_dest="";
 		String tmp_time="";
 		
-		
 		try {
-			URL url=new URL(url_list_horaire+"&refs="+current_station.getRef());
-			//Log.d(TAG,"Connexion à l'url : "+url);
+			URL url=new URL(url_list_horaire+"&refs="+refs);
+			//Log.d(TAG,"Connexion � l'url : "+url);
 			urlconnect = url.openConnection();
 	    	result = urlconnect.getInputStream();
 		} catch (Exception e) {
 			erreur = true;
-			myLog.write(TAG,e.getMessage());
+			myLog.write(TAG,e.getMessage(),myLog.ERROR);
 		}
 		
 		if( ! erreur){
-			// début de l'analyse du document.
+			// d�but de l'analyse du document.
 			XmlPullParser parser = Xml.newPullParser();
 			try{
 				parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 				parser.setInput(result, null);
 				parser.nextTag();
 				parser.require(XmlPullParser.START_TAG, ns, "xmldata");
-				parser.nextTag(); 	// arrivé sur erreur
-				Log.d(TAG, "Code Erreur reçu : "+parser.getAttributeValue(0));
+				parser.nextTag(); 	// arriv� sur erreur
+				Log.d(TAG, "Code Erreur re�u : "+parser.getAttributeValue(0));
 				goToTag(parser, "heure");
 				tmp_heure = readText(parser);
 				goToTag(parser, "passages");
 				
 				while (parser.next() != XmlPullParser.END_DOCUMENT){
-					// analyse jusqu'à la fin du document
+					// analyse jusqu'� la fin du document
 					if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("passage")){
-						Log.d(TAG,"Analyse du passage numéro "+parser.getAttributeValue(0));
-						goToTag(parser, "duree");	// arrivé sur duree
+						Log.d(TAG,"Analyse du passage num�ro "+parser.getAttributeValue(0));
+						goToTag(parser, "duree");	// arriv� sur duree
 						tmp_time = readText(parser);
-						goToTag(parser, "destination");	// arrivé sur destination
+						goToTag(parser, "destination");	// arriv� sur destination
 						tmp_dest = readText(parser);
 						list_horaire.add(new diviaHoraire(tmp_dest, tmp_time, tmp_heure));
 						
@@ -148,7 +147,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 				}
 			}
 			catch(Exception e){
-	    		myLog.write(TAG,e.getMessage());
+	    		myLog.write(TAG,e.getMessage(),myLog.ERROR);
 			}
 		}
 		
@@ -156,9 +155,16 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		return list_horaire;
 	}
 	
+	public List<diviaHoraire> parser_horaire(diviaStation current_station) throws IOException{
+		
+		return parser_horaire(current_station.getRef());
+		
+		
+	}
+	
 	public List<diviaStation> parse_station(Lignes ligne) throws XmlPullParserException, IOException{
 		if (!isConnected()){
-			throw new IOException("Réseaux de donnée non disponible");
+			throw new IOException("R�seaux de donn�e non disponible");
 		}
 		List<diviaStation> station= new ArrayList<diviaStation>();
 		URL url=null;
@@ -168,8 +174,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		
 		
 		if (!ligne.getVers().equals("")){
-			myLog.write(TAG,"Recherche des arr�ts de la ligne "+ligne);
-			station.add(new diviaStation("",App.getContext().getResources().getString(R.string.no_station_selected)));
+			myLog.write(TAG,"Recherche des arr�ts de la ligne "+ligne);
 			
 			try {
 				String uri = DiviaParser.url_list_line+"&ligne="+ligne.getCode()+"&sens="+ligne.getSens();
@@ -180,7 +185,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 			}
 			catch(Exception e){
 				error_detected=true;
-	    		myLog.write(TAG,e.getMessage());
+	    		myLog.write(TAG,e.getMessage(),myLog.ERROR);
 			}
 			
 			if(!error_detected){
@@ -195,7 +200,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 						continue;
 					}
 					else if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("als") ){
-						myLog.write(TAG,"Analyse de la station numéro "+parser.getAttributeValue(0));
+						myLog.write(TAG,"Analyse de la station num�ro "+parser.getAttributeValue(0));
 						diviaStation st = new diviaStation("new", "");
 						goToTag(parser, "code");
 						st.setCode(this.readText(parser));
@@ -204,7 +209,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 						goToTag(parser, "vers");
 						st.setVers(readText(parser));
 						goToTag(parser, "refs");
-						String refs = readText(parser);	// récupération des références des arrêts
+						String refs = readText(parser);	// r�cup�ration des r�f�rences des arr�ts
 						st.setRefs(refs);
 						station.add(st);
 					}
@@ -245,7 +250,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 					lines.add(line);
 				}
 				else{
-					myLog.write(TAG,"La ligne trouvé est buggé");
+					myLog.write(TAG,"La ligne trouv� est bugg�",myLog.WARNING);
 				}
 			}
 		}
@@ -253,7 +258,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 	}
 	
 	private void goToTag(XmlPullParser parser, String tagName) throws XmlPullParserException, IOException{
-		// parse le document XML jusqu'au tag demandé
+		// parse le document XML jusqu'au tag demand�
 		while (parser.next() != XmlPullParser.END_DOCUMENT) {
 			if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals(tagName)){
 				return;
@@ -341,9 +346,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 
 	@Override
 	protected Object doInBackground(Object... params) {
-		// TODO Auto-generated method stub
 		myLog.write(TAG, ((divia)params[0]).getType());
-		
 		
 		return null;
 	}

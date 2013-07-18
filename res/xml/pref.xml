@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference
+        android:title="@string/pref_refresh_line_title"
+        android:dialogTitle="@string/pref_refresh_line_title"
+        android:dialogMessage="@string/pref_refresh_line_msg"
+        android:summary="@string/pref_refresh_line_msg"
+        android:key="refresh_line"
+    	android:inputType="number"
+        />
+    <EditTextPreference
+        android:title="@string/pref_refresh_totem_title"
+        android:dialogTitle="@string/pref_refresh_totem_title"
+        android:dialogMessage="@string/pref_refresh_totem_msg"
+        android:summary="@string/pref_refresh_totem_msg"
+        android:key="refresh_totem"
+    	android:inputType="number"
+        />
+</PreferenceScreen>

@@ -8,6 +8,7 @@ public class diviaStation extends divia {
 	private String refs="";
 	private static final String TAG="TransportDijon";
 	private String vers="";
+	private String couleur="";
 
 	/*
 	 * Renvoie le type d'objet utilisé
@@ -20,6 +21,13 @@ public class diviaStation extends divia {
 		myLog.write(TAG, "Création de la station "+n);
 		setCode(c);
 		setNom(n);
+	}
+	
+	public diviaStation(String c, String n, String r){
+		myLog.write(TAG, "Création de la station "+n);
+		setCode(c);
+		setNom(n);
+		setRefs(r);
 	}
 
 	public String getNom() {
@@ -57,5 +65,11 @@ public class diviaStation extends divia {
 
 	public void setVers(String vers) {
 		this.vers = vers;
+	}
+	public String getCouleur() {
+		return couleur;
+	}
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
 	}
 }

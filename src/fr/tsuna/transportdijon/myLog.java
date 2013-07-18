@@ -16,6 +16,12 @@ public class myLog {
 	public static final String working_folder=Environment.getExternalStorageDirectory().toString()+"/diviaTotem/";
 	public static final String log_file="divia.log";
 	public static final String log_fullpath=working_folder+log_file;
+	
+	public static final int ERROR=0;
+	public static final int WARNING=1;
+	public static final int DEBUG=2;
+	
+	
 	public static void clear(){
 		// vidage du fichier de log
 		File f = new File(log_fullpath);
@@ -24,7 +30,6 @@ public class myLog {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				debug = false;
 				write("myLog",e.getMessage());
 			}
@@ -32,44 +37,58 @@ public class myLog {
 	}
 	
 	
-	public static void write(String TAG,String message){
+	public static void write(String TAG, String message, int type){
 		// Si le mode debug est actif
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",Locale.FRANCE);
-		String date = simpleDateFormat.format(new Date()); 
-		message = date+" "+message;
-		Log.d(TAG, message);
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",Locale.FRANCE);
+				String date = simpleDateFormat.format(new Date()); 
+				message = date+" "+message;
+				if (debug){
 
-		if (debug){
-			File logFile = new File(log_fullpath);
-			   if (!logFile.exists())
-			   {
-			      try
-			      {
-			    	  File logFold = new File(working_folder);
-			    	  logFold.mkdirs();
-			    	  logFile.createNewFile();
-			      } 
-			      catch (IOException e)
-			      {
-			         // TODO Auto-generated catch block
-			         e.printStackTrace();
-			         debug = false;
-			      }
-			   }
-			   try
-			   {
-			      //BufferedWriter for performance, true to set append to file flag
-			      BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true)); 
-			      buf.append(message);
-			      buf.newLine();
-			      buf.close();
-			   }
-			   catch (IOException e)
-			   {
-			      // TODO Auto-generated catch block
-			      e.printStackTrace();
-			   }
+					switch (type){
+						case ERROR:
+							Log.e(TAG, message);
+							break;
+						case WARNING:
+							Log.w(TAG, message);
+							break;
+						case DEBUG:
+							Log.d(TAG, message);
+							break;
+							
+					}
 
-		}
+					File logFile = new File(log_fullpath);
+					   if (!logFile.exists())
+					   {
+					      try
+					      {
+					    	  File logFold = new File(working_folder);
+					    	  logFold.mkdirs();
+					    	  logFile.createNewFile();
+					      } 
+					      catch (IOException e)
+					      {
+					         e.printStackTrace();
+					         debug = false;
+					      }
+					   }
+					   try
+					   {
+					      //BufferedWriter for performance, true to set append to file flag
+					      BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true)); 
+					      buf.append(message);
+					      buf.newLine();
+					      buf.close();
+					   }
+					   catch (IOException e)
+					   {
+					      myLog.write(TAG, e.getMessage(),myLog.ERROR);
+					   }
+
+				}
+	}
+	
+	public static void write(String TAG,String message){
+		write(TAG, message, DEBUG);
 	}
 }
