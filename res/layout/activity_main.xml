@@ -45,7 +45,8 @@
 
         <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp" >
 
             <LinearLayout
                 android:id="@+id/fav_scroll"

@@ -2,7 +2,7 @@ package fr.tsuna.transportdijon;
 
 
 
-public class diviaStation extends divia {
+public class KeolisStation extends divia {
 	private String code="";
 	private String nom="";
 	private String refs="";
@@ -17,13 +17,13 @@ public class diviaStation extends divia {
 	public String getType(){
 		return "diviaStation";
 	}
-	public diviaStation(String c, String n){
+	public KeolisStation(String c, String n){
 		myLog.write(TAG, "Création de la station "+n);
 		setCode(c);
 		setNom(n);
 	}
 	
-	public diviaStation(String c, String n, String r){
+	public KeolisStation(String c, String n, String r){
 		myLog.write(TAG, "Création de la station "+n);
 		setCode(c);
 		setNom(n);

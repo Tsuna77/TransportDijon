@@ -1,7 +1,7 @@
 package fr.tsuna.transportdijon;
 
 
-public class diviaHoraire extends divia {
+public class KeolisHoraire extends divia {
 	private String dest="";
 	private String time="";
 	private String refTime = "";
@@ -28,7 +28,7 @@ public class diviaHoraire extends divia {
 		this.time = time;
 	}
 	
-	public diviaHoraire(String dest, String time, String refTime){
+	public KeolisHoraire(String dest, String time, String refTime){
 		myLog.write(TAG,"Création d'un nouvelle horaire pour la destination "+dest+" passage à "+time);
 		setDest(dest);
 		setTime(time);

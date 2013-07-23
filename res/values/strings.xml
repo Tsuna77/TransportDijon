@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
     <string name="app_name">Se déplacer à Dijon</string>
     <string name="action_settings">Paramètres</string>
     <string name="nav_to_settings_text">Paramètres</string>
@@ -42,12 +43,22 @@
     <string name="stay">Rester</string>
     <string name="retour">Revenir</string>
     <string name="no_time_available">Aucun horaire disponible</string>
-    <string name="line_title">Ligne %1$s, Arrêt %2$s\n</string>
+    <!-- Ne pas modifier la syntax du line_title -->
+    <string name="line_title">%1$s (%3$s) : %2$s\n</string>
     <string name="no_network">Pas de connexion réseaux</string>
     <string name="menu_save">Enregistrer</string>
     <string name="refresh_info_test">màj auto %1$dsec</string>
     <string name="pref_refresh_line_title">Màj des lignes</string>
-    <string name="pref_refresh_line_msg">Temps avant de considérer les informations des lignes obselète en heure(par défaut 24h)</string>
+    <string name="pref_refresh_line_msg">Temps avant de considérer les informations des lignes obselète en heure(par défaut 72h)</string>
     <string name="pref_refresh_totem_title">Màj des totems</string>
-    <string name="pref_refresh_totem_msg">Temps entre deux mise à jour des totem en seconde(par défaut 20sec)</string>
+    <string name="title_activity_about">A propos</string>
+    <string name="action_about">A propos</string>
+    <string name="pref_refresh_totem_msg">Temps entre deux mise à jour des totem en seconde(par défaut 40sec)</string>
+    <string name="about_text">L\'application TransportDijon à été réaliser dans le but de fournir une application rapide permettant de consulter les horaires des transports commun de Dijon.\n\nIl y a actuellement 1 developpeur :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nJe tiens à remercier tous ceux qui m\'ont aidé à la réalisation de ce projets et plus particulièrement Louis F, Hervé DS, Tonio (ton logo est superbe) et tous les membres de la communauté de test de l\'application.</string>
+    <string name="context_menu_title">Gerer favoris</string>
+    <string name="context_menu_supress">Supprimer</string>
+    
 </resources>
+
+
+

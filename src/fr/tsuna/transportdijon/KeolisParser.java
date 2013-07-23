@@ -25,7 +25,7 @@ import android.util.Xml;
  * 
  * 
  */
-public class DiviaParser extends AsyncTask<Object, Object, Object> {
+public class KeolisParser extends AsyncTask<Object, Object, Object> {
 	public static final String url_list_line="http://timeo3.keolis.com/relais/217.php?xml=1";
 	public static final String url_list_horaire="http://timeo3.keolis.com/relais/217.php?xml=3&ran=1";
     private static final String ns = null;
@@ -71,7 +71,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
     	List<Lignes> list_line = new ArrayList<Lignes>();
     	
     	try {
-    		url = new URL(DiviaParser.url_list_line);
+    		url = new URL(KeolisParser.url_list_line);
 			urlconnect = url.openConnection();
 	    	result = urlconnect.getInputStream();
 		}
@@ -96,11 +96,11 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		}
 	}
 
-	public List<diviaHoraire> parser_horaire(String refs) throws IOException{
+	public List<KeolisHoraire> parser_horaire(String refs) throws IOException{
 		if (!isConnected()){
 			throw new IOException("R�seaux de donn�e non disponible");
 		}
-		List<diviaHoraire> list_horaire = new ArrayList<diviaHoraire>();
+		List<KeolisHoraire> list_horaire = new ArrayList<KeolisHoraire>();
 		Boolean erreur = false;
 		URLConnection urlconnect=null;
 		InputStream result=null;
@@ -141,7 +141,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 						tmp_time = readText(parser);
 						goToTag(parser, "destination");	// arriv� sur destination
 						tmp_dest = readText(parser);
-						list_horaire.add(new diviaHoraire(tmp_dest, tmp_time, tmp_heure));
+						list_horaire.add(new KeolisHoraire(tmp_dest, tmp_time, tmp_heure));
 						
 					}
 				}
@@ -155,18 +155,18 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 		return list_horaire;
 	}
 	
-	public List<diviaHoraire> parser_horaire(diviaStation current_station) throws IOException{
+	public List<KeolisHoraire> parser_horaire(KeolisStation current_station) throws IOException{
 		
 		return parser_horaire(current_station.getRef());
 		
 		
 	}
 	
-	public List<diviaStation> parse_station(Lignes ligne) throws XmlPullParserException, IOException{
+	public List<KeolisStation> parse_station(Lignes ligne) throws XmlPullParserException, IOException{
 		if (!isConnected()){
 			throw new IOException("R�seaux de donn�e non disponible");
 		}
-		List<diviaStation> station= new ArrayList<diviaStation>();
+		List<KeolisStation> station= new ArrayList<KeolisStation>();
 		URL url=null;
 		URLConnection urlconnect = null;
 		InputStream result=null;
@@ -177,7 +177,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 			myLog.write(TAG,"Recherche des arr�ts de la ligne "+ligne);
 			
 			try {
-				String uri = DiviaParser.url_list_line+"&ligne="+ligne.getCode()+"&sens="+ligne.getSens();
+				String uri = KeolisParser.url_list_line+"&ligne="+ligne.getCode()+"&sens="+ligne.getSens();
 	    		myLog.write(TAG,"Appel de l'url : "+uri);
 				url = new URL(uri);
 				urlconnect = url.openConnection();
@@ -201,7 +201,7 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 					}
 					else if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("als") ){
 						myLog.write(TAG,"Analyse de la station num�ro "+parser.getAttributeValue(0));
-						diviaStation st = new diviaStation("new", "");
+						KeolisStation st = new KeolisStation("new", "");
 						goToTag(parser, "code");
 						st.setCode(this.readText(parser));
 						goToTag(parser, "nom");
@@ -218,11 +218,11 @@ public class DiviaParser extends AsyncTask<Object, Object, Object> {
 			}
 			else{
 				station.clear();
-				station.add(new diviaStation("",Resources.getSystem().getString(R.string.error_in_work)));
+				station.add(new KeolisStation("",Resources.getSystem().getString(R.string.error_in_work)));
 			}
 		}
 		else{
-			station.add(new diviaStation("", "Veuillez choisir une ligne en premier"));
+			station.add(new KeolisStation("", "Veuillez choisir une ligne en premier"));
 		}
 		
 		return station;

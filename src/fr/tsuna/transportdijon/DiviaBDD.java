@@ -55,7 +55,7 @@ public class DiviaBDD {
 		return bdd.insert(MyDB.TABLE_LIGNE, null,values);
 	}
 
-	public long insertStation(diviaStation station, Lignes ligne){
+	public long insertStation(KeolisStation station, Lignes ligne){
 		ContentValues values = new ContentValues();
 
 		values.put(MyDB.STATION_CODE, station.getCode());
@@ -67,8 +67,6 @@ public class DiviaBDD {
 		
 		return bdd.insert(MyDB.TABLE_STATION, null,values);
 	}
-	
-	
 	
 	public int updateLigne(Lignes lignes){
 		ContentValues values = new ContentValues();
@@ -115,12 +113,10 @@ public class DiviaBDD {
 		return c.getString(0);
 	}
 	
-
 	public void fillinLineTable(List<Lignes> lignes){
-		boolean close_needed=false;
-		if ( !isOpened){
-			open();
-			close_needed=true;
+		
+		if (lignes.size() <= 45){
+			return;	// pas assez d'information
 		}
 		bdd.delete(MyDB.TABLE_LIGNE, "1=1", null);
 		for (Lignes ligne : lignes){
@@ -134,20 +130,16 @@ public class DiviaBDD {
 		values.put(MyDB.PARAM_VALUE,sts);
 		
 		bdd.update(MyDB.TABLE_PARAM, values, MyDB.PARAM_KEY+"='"+MyDB.LAST_LINE_UPDATE+"'", null);
-		if (close_needed){
-			close();
-		}
-		
 	}
 
-	public void fillinStationTable(List<diviaStation> stations, Lignes ligne){
+	public void fillinStationTable(List<KeolisStation> stations, Lignes ligne){
 		boolean close_needed=false;
 		if ( !isOpened){
 			open();
 			close_needed=true;
 		}
 		bdd.delete(MyDB.TABLE_STATION, MyDB.STATION_LIGNE_CODE+"='"+ligne.getCode()+"' AND "+MyDB.STATION_LIGNE_SENS+"='"+ligne.getSens()+"'", null);
-		for (diviaStation station : stations){
+		for (KeolisStation station : stations){
 			myLog.write(TAG, station.toString());
 			insertStation(station, ligne);
 		}
@@ -191,8 +183,8 @@ public class DiviaBDD {
 		
 	}
 	
-	public ArrayList<diviaStation> getAllStations(Lignes ligne){
-		ArrayList<diviaStation> stations = new ArrayList<diviaStation>();
+	public ArrayList<KeolisStation> getAllStations(Lignes ligne){
+		ArrayList<KeolisStation> stations = new ArrayList<KeolisStation>();
 		String code = codeToTwoDigit(ligne.getCode());
 		String sens = ligne.getSens();
 		Cursor c = bdd.query(MyDB.TABLE_STATION, new String[] {MyDB.STATION_CODE, MyDB.STATION_NOM, MyDB.STATION_REFS}, MyDB.STATION_LIGNE_CODE+"='"+code+"' AND "+MyDB.STATION_LIGNE_SENS+"='"+sens+"'", null, null, null, null, null);
@@ -200,7 +192,7 @@ public class DiviaBDD {
 			return null;
 		
 		while(c.moveToNext()){
-			stations.add(new diviaStation(c.getString(0), c.getString(1), c.getString(2)));
+			stations.add(new KeolisStation(c.getString(0), c.getString(1), c.getString(2)));
 		}
 		
 		return stations;
@@ -219,25 +211,35 @@ public class DiviaBDD {
 		return code;
 	}
 	
-	public void addFav(diviaStation station, Lignes ligne){
+	public void addFav(KeolisStation station, Lignes ligne){
 		// mise en favorie de l'arr�t
 		ContentValues values = new ContentValues();
 
-		values.put(MyDB.FAV_CODE,ligne.getCode());
+		values.put(MyDB.FAV_CODE,ligne.getNom());
 		values.put(MyDB.FAV_NOM,station.getNom());
 		values.put(MyDB.FAV_REFS,station.getRef());
 		values.put(MyDB.FAV_VERS,ligne.getVers());
+		values.put(MyDB.FAV_POS, getMaxPosFav() +1);
 		try{
 			bdd.insertOrThrow(MyDB.TABLE_FAV, null, values);
 		}catch(Exception e){
 			myLog.write(TAG, "Impossible de mettre l'arr�t en favori");
 		}
 	}
+	
+	public int getMaxPosFav(){
+		// renvoie le max de la position des favoris
+		String sql = "SELECT MAX("+MyDB.FAV_POS+") FROM "+MyDB.TABLE_FAV;
+		Cursor c = bdd.rawQuery(sql, null);
+		
+		c.moveToFirst();
+		return c.getInt(0);
+	}
 
 	public List<diviaFav> getAllFav() {
 		ArrayList<diviaFav> favoris = new ArrayList<diviaFav>();
 		
-		Cursor c = bdd.query(MyDB.TABLE_FAV, new String[] {MyDB.FAV_CODE, MyDB.FAV_NOM, MyDB.FAV_VERS, MyDB.FAV_REFS}, null, null, null, null, null, null);
+		Cursor c = bdd.rawQuery("SELECT "+MyDB.FAV_CODE+","+ MyDB.FAV_NOM+","+MyDB.FAV_VERS+","+MyDB.FAV_REFS+" FROM "+MyDB.TABLE_FAV+" ORDER BY "+MyDB.FAV_POS, null);
 		if (c.getCount() == 0)
 			return null;
 		while(c.moveToNext()){
@@ -245,5 +247,21 @@ public class DiviaBDD {
 		}
 		
 		return favoris;
+	}
+
+	public void SupressFav(String textView_text){
+		// information sur le favoris contenu dans le champs text
+		String[] list=textView_text.split("\n");
+		myLog.write(TAG, "Suppresion du favori : "+ list[0]);
+		String station = list[0].split(": ")[1];
+		String code_vers = list[0].split(": ")[0];
+		String code=code_vers.split(" \\(")[0];
+		String vers=code_vers.split(" \\(")[1].replace(") ","");
+		
+		String sql="delete from "+MyDB.TABLE_FAV+" WHERE "+MyDB.FAV_CODE+"='"+code+"' AND "+MyDB.FAV_NOM+"='"+station+"' AND "+MyDB.FAV_VERS+"='"+vers+"'";
+		Cursor rep=bdd.rawQuery(sql, null);
+		
+		rep.moveToFirst();
+		
 	}
 }

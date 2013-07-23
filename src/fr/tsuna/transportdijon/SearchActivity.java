@@ -23,8 +23,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SearchActivity extends Activity {
 	private List<Lignes> list_line = new ArrayList<Lignes>();
-	private List<diviaStation> list_station = new ArrayList<diviaStation>();
-	private List<diviaHoraire> list_horaire = new ArrayList<diviaHoraire>();
+	private List<KeolisStation> list_station = new ArrayList<KeolisStation>();
+	private List<KeolisHoraire> list_horaire = new ArrayList<KeolisHoraire>();
 	private String TAG = "transportdijon";
 	private Spinner line_list;
 	private Spinner station_list;
@@ -100,7 +100,7 @@ public class SearchActivity extends Activity {
 		
 
        	Lignes current_line = (Lignes) line_list.getSelectedItem();
-       	diviaStation current_station = (diviaStation) station_list.getSelectedItem();
+       	KeolisStation current_station = (KeolisStation) station_list.getSelectedItem();
        	 
 		bdd.addFav(current_station, current_line);
 		
@@ -143,11 +143,11 @@ public class SearchActivity extends Activity {
 					TextView txt = (TextView)findViewById(R.id.search_result_info); 
 					String horaire="Prochain passage : \n";
 
-					horaire+=((diviaHoraire)list_horaire.get(0)).getDest()+"\t";
-					horaire+=((diviaHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
+					horaire+=((KeolisHoraire)list_horaire.get(0)).getDest()+"\t";
+					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
 					try{
-						horaire+=((diviaHoraire)list_horaire.get(1)).getDest()+"\t";
-						horaire+=((diviaHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
+						horaire+=((KeolisHoraire)list_horaire.get(1)).getDest()+"\t";
+						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
 					}
 					catch(Exception e){
 						myLog.write(TAG, "Il n'y a qu'un seul horaire de disponible", myLog.WARNING);
@@ -164,12 +164,12 @@ public class SearchActivity extends Activity {
 		 new Thread(new Runnable() { 
              public void run() { 
             	 Lignes current_line = (Lignes) line_list.getSelectedItem();
-            	 diviaStation current_station = (diviaStation) station_list.getSelectedItem();
+            	 KeolisStation current_station = (KeolisStation) station_list.getSelectedItem();
             	 myLog.write(TAG,"D�but du thread de mise � jour des horaires");
             	 clear_result();
             	 try {
             		if (current_line.getVers() != ""){
-            			list_horaire = new DiviaParser().parser_horaire(current_station);
+            			list_horaire = new KeolisParser().parser_horaire(current_station);
             			show_result_UI();
             		}
  				}catch (Exception e) {
@@ -191,7 +191,7 @@ public class SearchActivity extends Activity {
         if (list_station != null){
 	        try{
 	        	station_list = (Spinner) findViewById(R.id.spinner_station);
-		    	ArrayAdapter<diviaStation> adapter = new ArrayAdapter<diviaStation>(this, android.R.layout.simple_list_item_1, list_station);
+		    	ArrayAdapter<KeolisStation> adapter = new ArrayAdapter<KeolisStation>(this, android.R.layout.simple_list_item_1, list_station);
 		    	station_list.setAdapter(adapter);
 			}catch(Exception e){
 				myLog.write(TAG, e.getMessage());

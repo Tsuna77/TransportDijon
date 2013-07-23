@@ -2,6 +2,7 @@ package fr.tsuna.transportdijon;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
@@ -18,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +51,11 @@ public class SettingsActivity extends PreferenceActivity {
 		setupSimplePreferencesScreen();
 
 	}
-
+	@Override
+	protected void onPause(){
+		update_pref();	
+		super.onPause();
+	}
 	/**
 	 * Shows the simplified settings UI if the device configuration if the
 	 * device configuration dictates that a simplified, single-pane UI should be
@@ -63,21 +69,6 @@ public class SettingsActivity extends PreferenceActivity {
 
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		
-		
-		SP.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
-	        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-	           myLog.write(TAG, "*** Modification des préférences ***");
-	           DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
-	   		
-	   			diviabdd.open();
-	   			
-	   			diviabdd.setParam(key, sharedPreferences.getString(key, "24"));
-	   			
-	   			diviabdd.close();
-
-	           
-	        }
-	    });
 		
 		DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
 		
@@ -93,13 +84,34 @@ public class SettingsActivity extends PreferenceActivity {
 		Preference totem_pref = (Preference) findPreference(MyDB.REFRESH_TOTEM);
 		
 
-		myLog.write(TAG, "Settings = "+SP.getString(MyDB.REFRESH_LINE, ""));
+		//myLog.write(TAG, "Settings = "+SP.getString(MyDB.REFRESH_LINE, ""));
 
 		line_pref.setDefaultValue(refresh_line);
 		totem_pref.setDefaultValue(totem_refresh);
 		
 	}
 
+	
+	private void update_pref(){
+		myLog.write(TAG, "Fermeture de l'écran de préférence, enregistrement des valeurs");
+		
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		ArrayList<String> list_param = new ArrayList<String>();
+		list_param.add(MyDB.REFRESH_LINE);
+		list_param.add( MyDB.REFRESH_TOTEM);
+		
+        DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
+		
+		diviabdd.open();
+		for (String param : list_param) {
+			
+			diviabdd.setParam(param, sharedPreferences.getString(param, "24"));
+		}
+		
+		diviabdd.close();
+
+      
+	}
 	/** {@inheritDoc} */
 	@Override
 	public boolean onIsMultiPane() {

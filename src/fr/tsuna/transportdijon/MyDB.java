@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 
 public class MyDB extends SQLiteOpenHelper {
-	private static final int VERSION_BDD = 15;
+	private static final int VERSION_BDD = 18;
 	
 	
 	public static final String TABLE_LIGNE = "lignes";
@@ -27,8 +27,9 @@ public class MyDB extends SQLiteOpenHelper {
 	public static final String FAV_ID = "ID";
 	public static final String FAV_CODE = "code";	// code de la ligne
 	public static final String FAV_VERS = "vers";	// direction de la ligne
-	public static final String FAV_NOM = "nom";		// Nom de l'arr�t
-	public static final String FAV_REFS = "ref";	// R�f�rense � transmettre � l'API divia
+	public static final String FAV_NOM = "nom";		// Nom de l'arrêt
+	public static final String FAV_REFS = "ref";	// Référense à transmettre à l'API divia
+	public static final String FAV_POS = "position";	//position dans l'interface, sert de clef de tri 
 	
 	public static final String TABLE_STATION = "station";
 	public static final String STATION_ID = "ID";
@@ -56,7 +57,8 @@ public class MyDB extends SQLiteOpenHelper {
 			+ FAV_CODE + " TEXT NOT NULL, "
 			+ FAV_VERS + " TEXT NOT NULL, "
 			+ FAV_NOM + " TEXT NOT NULL, "
-			+ FAV_REFS + " TEXT NOT NULL);";
+			+ FAV_REFS + " TEXT NOT NULL,"
+			+ FAV_POS + " INTEGER);";
 	
 	private static final String CREATE_STATION = "CREATE TABLE "+ TABLE_STATION+" ("
 			+ STATION_ID+" INTEGER PRIMARY KEY, "
@@ -70,9 +72,9 @@ public class MyDB extends SQLiteOpenHelper {
 	private static final String ADD_LAST_LINE_UPDATE= "INSERT INTO "+TABLE_PARAM+" VALUES('"
 			+ LAST_LINE_UPDATE+"','0');";
 	private static final String ADD_REFRESH_LINE= "INSERT INTO "+TABLE_PARAM+" VALUES('"
-			+ REFRESH_LINE+"','24');";
+			+ REFRESH_LINE+"','72');";
 	private static final String ADD_REFRESH_TOTEM= "INSERT INTO "+TABLE_PARAM+" VALUES('"
-			+ REFRESH_TOTEM+"','20');";
+			+ REFRESH_TOTEM+"','40');";
 	
 	public MyDB(Context context, String name, CursorFactory factory){
 		super(context,name,factory,VERSION_BDD);

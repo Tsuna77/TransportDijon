@@ -20,6 +20,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	private static final String TAG = "TransportDijon";
 	private List<Lignes> line_name=new ArrayList<Lignes>();
-	List<diviaStation> station_name = new ArrayList<diviaStation>();
+	List<KeolisStation> station_name = new ArrayList<KeolisStation>();
 	boolean force_refresh=false;
 	boolean refresh=false;
 	String console_msg = "";
@@ -48,6 +50,8 @@ public class MainActivity extends Activity {
 
 	private Handler handler_horaire = new Handler();
 	private Runnable run_horaire = new Runnable() {public void run() {update_time();}}; 
+	private final int EDIT_POS=1;
+	private TextView selected_fav;
 	
 	
 	private synchronized void update_time(){ 
@@ -55,17 +59,21 @@ public class MainActivity extends Activity {
     		return;
     	updating = true;
     	handler_horaire.removeCallbacks(run_horaire);
-    	handler_horaire.postDelayed(run_horaire, totem_refresh);
     	// on recharge la liste des favoris en cas de mise à jour
     	DiviaBDD diviadb = new DiviaBDD(MainActivity.this);
     	diviadb.open();
         totem_refresh = Integer.parseInt(diviadb.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
     	fav_list=diviadb.getAllFav();
+    	if (fav_list == null){
+    		// il n'y a plus de favoris, redirection vers la page de recherche
+    		startSearch();
+    		return;
+    	}
     	diviadb.close();
     	if (!fav_list.isEmpty()){
             new Thread(new Runnable() { 
                  public void run() { 
-                	 List<diviaHoraire> list_horaire;
+                	 List<KeolisHoraire> list_horaire;
                 	 fav_text.clear();
            			 TextToConsole(getString(R.string.reload));
            			try {
@@ -76,7 +84,7 @@ public class MainActivity extends Activity {
            			fav_text.clear();
                 	 myLog.write(TAG,"Début du thread de mise à jour des horaires");
           			String horaire="";
-          			if (!new DiviaParser().isConnected()){
+          			if (!new KeolisParser().isConnected()){
           				TextView txt = new TextView(MainActivity.this);
 
                 		txt.setText(getString(R.string.no_network));
@@ -91,20 +99,22 @@ public class MainActivity extends Activity {
                 	 for( diviaFav fav: fav_list){
 
                 		 TextView txt = new TextView(MainActivity.this);
+                		 registerForContextMenu(txt);
                 		 try {
                      		if (fav.getVers() != ""){
 
-                     			list_horaire = new DiviaParser().parser_horaire(fav.getRefs());
+                     			list_horaire = new KeolisParser().parser_horaire(fav.getRefs());
                      			
                  				horaire=getString(R.string.line_title);
                  				horaire=horaire.replace("%1$s", fav.getCode());
                  				horaire=horaire.replace("%2$s", fav.getNom());
+                 				horaire=horaire.replace("%3$s", fav.getVers());
 
-            					horaire+=((diviaHoraire)list_horaire.get(0)).getDest()+"\t";
-            					horaire+=((diviaHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
+            					horaire+=((KeolisHoraire)list_horaire.get(0)).getDest()+"\t";
+            					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
             					try{
-            						horaire+=((diviaHoraire)list_horaire.get(1)).getDest()+"\t";
-            						horaire+=((diviaHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
+            						horaire+=((KeolisHoraire)list_horaire.get(1)).getDest()+"\t";
+            						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
             					}
             					catch(Exception e){
             						myLog.write(TAG, "Il n'y a qu'un seul horaire de disponible", myLog.WARNING);
@@ -116,9 +126,12 @@ public class MainActivity extends Activity {
           					horaire+=getString(R.string.no_time_available);
           				}
                 		txt.setText(horaire);
+                		// enregistrement pour le menu contextuel
+                		registerForContextMenu(txt);
      					fav_text.add(txt);
                 	 }
           			update_time_UI(); 
+          	    	handler_horaire.postDelayed(run_horaire, totem_refresh);
           			updating=false;
           			TextToConsole("");
                  }
@@ -128,6 +141,29 @@ public class MainActivity extends Activity {
     		
             ((TextView)findViewById(R.id.textView_refresh_tim)).setText(getString(R.string.refresh_info_test, totem_refresh/1000));
     	}
+    }
+	
+	@Override
+    public void onCreateContextMenu(ContextMenu menu,View v,ContextMenuInfo info)
+    {
+		menu.setHeaderTitle(getString(R.string.context_menu_title));
+		menu.add(0, EDIT_POS,0,R.string.context_menu_supress);
+		selected_fav = (TextView)v;
+    }
+	
+	@Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+		switch (item.getItemId()){
+			case EDIT_POS:
+				//myLog.write(TAG, "Vous avez choisi de supprimer le favoris : "+selected_fav.getText());
+				DiviaBDD db = new DiviaBDD(MainActivity.this);
+				db.open();
+				db.SupressFav(selected_fav.getText().toString());
+				db.close();
+				update_time();
+		}
+		return false;
     }
 	
 	public void onPause(){
@@ -162,7 +198,7 @@ public class MainActivity extends Activity {
 			Thread.sleep(100);
 		} catch (InterruptedException e1) {
 		}
-        DiviaParser.setContext(this);
+        KeolisParser.setContext(this);
 		handler_horaire.removeCallbacks(run_horaire);
         
         myLog.clear();
@@ -294,7 +330,7 @@ public class MainActivity extends Activity {
 		
     	try {
             diviabdd.open();
-    		line_name=new DiviaParser().parseLine();
+    		line_name=new KeolisParser().parseLine();
     		diviabdd.fillinLineTable(line_name);
 
 		}catch (Exception e) {
@@ -307,7 +343,7 @@ public class MainActivity extends Activity {
     	for (Lignes ligne: line_name) {
     		TextToConsole(getString(R.string.loading_station_x, ligne.getNom()+" ("+ligne.getVers()+")"));
     		try {
-				station_name = new DiviaParser().parse_station(ligne);
+				station_name = new KeolisParser().parse_station(ligne);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (XmlPullParserException e) {
@@ -446,6 +482,12 @@ public class MainActivity extends Activity {
     		Intent intent = new Intent(this, SettingsActivity.class );
     		startActivityForResult(intent,0);
     }
+
+    public void startAbout(){
+    	if (locked){return;}
+    		Intent intent = new Intent(this, AboutActivity.class );
+    		startActivityForResult(intent,0);
+    }
     public void startSearch(){
 
     	if (locked){return;}
@@ -475,6 +517,9 @@ public class MainActivity extends Activity {
         		break;
         	case R.id.action_addTotem:
         		startSearch();
+        		break;
+        	case R.id.action_about:
+        		startAbout();
         		break;
         }
         return super.onOptionsItemSelected(item);

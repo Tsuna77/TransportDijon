@@ -238,21 +238,21 @@ containing a value of this type.
         public static final int default_gap=0x7f060000;
     }
     public static final class drawable {
-        public static final int ic_action_add_fav=0x7f020000;
+        public static final int ic_action_about=0x7f020000;
         public static final int ic_action_add_fav2=0x7f020001;
-        public static final int ic_action_setings=0x7f020002;
-        public static final int ic_action_settings_v2=0x7f020003;
-        public static final int ic_action_update=0x7f020004;
-        public static final int ic_fav=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int ic_launcher_v2=0x7f020007;
-        public static final int ic_launcherv4=0x7f020008;
-        public static final int ic_menu_save=0x7f020009;
+        public static final int ic_action_settings_v2=0x7f020002;
+        public static final int ic_action_update=0x7f020003;
+        public static final int ic_fav=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_launcher_v2=0x7f020006;
+        public static final int ic_launcherv4=0x7f020007;
+        public static final int ic_menu_save=0x7f020008;
     }
     public static final class id {
-        public static final int action_addTotem=0x7f050020;
-        public static final int action_settings=0x7f05001e;
-        public static final int acton_refresh=0x7f05001f;
+        public static final int action_about=0x7f050022;
+        public static final int action_addTotem=0x7f050021;
+        public static final int action_settings=0x7f05001f;
+        public static final int acton_refresh=0x7f050020;
         public static final int alignBounds=0x7f050002;
         public static final int alignMargins=0x7f050003;
         public static final int bottom=0x7f050005;
@@ -261,44 +261,49 @@ containing a value of this type.
         public static final int center_vertical=0x7f050008;
         public static final int clip_horizontal=0x7f05000f;
         public static final int clip_vertical=0x7f05000e;
-        public static final int console=0x7f050018;
+        public static final int console=0x7f050019;
         public static final int end=0x7f050011;
-        public static final int fav_scroll=0x7f050016;
+        public static final int fav_scroll=0x7f050017;
         public static final int fill=0x7f05000d;
         public static final int fill_horizontal=0x7f05000b;
         public static final int fill_vertical=0x7f050009;
         public static final int horizontal=0x7f050000;
-        public static final int imageView1=0x7f050014;
+        public static final int imageView1=0x7f050015;
         public static final int left=0x7f050006;
-        public static final int main_top_layout=0x7f050012;
-        public static final int menu_refresh=0x7f050022;
-        public static final int menu_save=0x7f050021;
-        public static final int relativeLayout1=0x7f050017;
+        public static final int main_top_layout=0x7f050013;
+        public static final int menu_refresh=0x7f050024;
+        public static final int menu_save=0x7f050023;
+        public static final int relativeLayout1=0x7f050018;
         public static final int right=0x7f050007;
-        public static final int search_line_title=0x7f050019;
-        public static final int search_result_info=0x7f05001d;
-        public static final int search_station_title=0x7f05001b;
-        public static final int spinner_line=0x7f05001a;
-        public static final int spinner_station=0x7f05001c;
+        public static final int search_line_title=0x7f05001a;
+        public static final int search_result_info=0x7f05001e;
+        public static final int search_station_title=0x7f05001c;
+        public static final int spinner_line=0x7f05001b;
+        public static final int spinner_station=0x7f05001d;
         public static final int start=0x7f050010;
-        public static final int textView1=0x7f050013;
-        public static final int textView_refresh_tim=0x7f050015;
+        public static final int textView1=0x7f050014;
+        public static final int textView_refresh_tim=0x7f050016;
         public static final int top=0x7f050004;
+        public static final int txt_about=0x7f050012;
         public static final int vertical=0x7f050001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_search=0x7f030001;
+        public static final int activity_about=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_search=0x7f030002;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
-        public static final int menu_totem=0x7f0a0001;
+        public static final int about=0x7f0a0000;
+        public static final int main=0x7f0a0001;
+        public static final int menu_totem=0x7f0a0002;
     }
     public static final class string {
         public static final int Cant_connect=0x7f08000c;
         public static final int Direction=0x7f080008;
         public static final int NC=0x7f080009;
         public static final int Titre_fav=0x7f080014;
+        public static final int about_text=0x7f080034;
+        public static final int action_about=0x7f080032;
         public static final int action_add=0x7f080017;
         public static final int action_settings=0x7f080001;
         public static final int add_to_fav=0x7f08001f;
@@ -309,11 +314,15 @@ containing a value of this type.
         public static final int chose_this_line=0x7f080005;
         public static final int confirm=0x7f080023;
         public static final int confirm_refresh=0x7f080020;
+        public static final int context_menu_supress=0x7f080036;
+        public static final int context_menu_title=0x7f080035;
         public static final int cur_line=0x7f080006;
         public static final int error_in_work=0x7f08000d;
         public static final int image_desc_star_logo=0x7f080018;
         public static final int line_loading=0x7f08000e;
         public static final int line_loading_finished=0x7f08001c;
+        /**  Ne pas modifier la syntax du line_title 
+         */
         public static final int line_title=0x7f08002a;
         public static final int loading_finished=0x7f08001e;
         public static final int loading_station_x=0x7f08001d;
@@ -329,7 +338,7 @@ containing a value of this type.
         public static final int popup_add_to_fav=0x7f080025;
         public static final int pref_refresh_line_msg=0x7f08002f;
         public static final int pref_refresh_line_title=0x7f08002e;
-        public static final int pref_refresh_totem_msg=0x7f080031;
+        public static final int pref_refresh_totem_msg=0x7f080033;
         public static final int pref_refresh_totem_title=0x7f080030;
         public static final int quit=0x7f080012;
         public static final int refresh=0x7f080003;
@@ -342,8 +351,9 @@ containing a value of this type.
         public static final int stay=0x7f080027;
         public static final int temps_restant=0x7f08000a;
         public static final int time_loading=0x7f080010;
+        public static final int title_activity_about=0x7f080031;
         public static final int title_activity_search=0x7f080019;
-        public static final int title_activity_settings=0x7f080032;
+        public static final int title_activity_settings=0x7f080037;
         public static final int updating=0x7f080011;
         public static final int version=0x7f08001a;
     }
