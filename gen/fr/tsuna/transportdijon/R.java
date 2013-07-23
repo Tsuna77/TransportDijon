@@ -322,6 +322,7 @@ containing a value of this type.
         public static final int line_loading=0x7f08000e;
         public static final int line_loading_finished=0x7f08001c;
         /**  Ne pas modifier la syntax du line_title 
+ Ne pas modifier la syntax du line_title 
          */
         public static final int line_title=0x7f08002a;
         public static final int loading_finished=0x7f08001e;
