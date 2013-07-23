@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">Se déplacer à Dijon</string>
+    <string name="app_name">TransportDijon</string>
     <string name="action_settings">Paramètres</string>
     <string name="nav_to_settings_text">Paramètres</string>
     <string name="refresh">Recharger</string>
