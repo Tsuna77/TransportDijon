@@ -33,7 +33,7 @@
     <string name="loading_station_x">Loading line : %1$s</string>
     <string name="loading_finished">Loading finished</string>
     <string name="add_to_fav">Add to favourite</string>
-    <string name="confirm_refresh">Data update will start(lines and stations)\nApps may not respond during some seconds.\nIf you don't do it, line information may be outdate\nDo you want to continue ?</string>
+    <string name="confirm_refresh">Data update will start(lines and stations)\nApps may not respond during some seconds.\nIf you don\'t do it, line information may be outdate\nDo you want to continue ?</string>
     <string name="refresh_force_info">First start update will start\nYou need to wait loading finished before using the app.</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">OK</string>

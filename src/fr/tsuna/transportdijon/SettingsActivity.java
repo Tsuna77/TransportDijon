@@ -2,9 +2,7 @@ package fr.tsuna.transportdijon;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -43,6 +41,7 @@ public class SettingsActivity extends PreferenceActivity {
 	private final String TAG="TransportDijon";
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -67,7 +66,6 @@ public class SettingsActivity extends PreferenceActivity {
 			return;
 		}
 
-		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		
 		
 		DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
@@ -122,6 +120,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 * Helper method to determine if the device has an extra-large screen. For
 	 * example, 10" tablets are extra-large.
 	 */
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	private static boolean isXLargeTablet(Context context) {
 		return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
 	}
