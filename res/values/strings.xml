@@ -7,7 +7,7 @@
     <string name="refresh">Recharger</string>
     <string name="reload">Rechargement en cours</string>
     <string name="chose_this_line">Choisissez une ligne :</string>
-    <string name="cur_line">"Ligne choisie : "</string>
+    <string name="cur_line">Ligne choisie : </string>
     <string name="chose_station">Choisissez un arrêt :</string>
     <string name="Direction">Direction</string>
     <string name="NC">NC</string>
