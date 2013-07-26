@@ -85,6 +85,7 @@ public class MainActivity extends Activity {
           				TextView txt = new TextView(MainActivity.this);
 
                 		txt.setText(getString(R.string.no_network));
+                		txt.setTextColor(getResources().getColor(R.color.white));
      					fav_text.add(txt);
               			update_time_UI(); 
               			updating=false;
@@ -123,6 +124,7 @@ public class MainActivity extends Activity {
           					horaire+=getString(R.string.no_time_available);
           				}
                 		txt.setText(horaire);
+                		txt.setTextColor(getResources().getColor(R.color.white));
                 		// enregistrement pour le menu contextuel
                 		registerForContextMenu(txt);
      					fav_text.add(txt);

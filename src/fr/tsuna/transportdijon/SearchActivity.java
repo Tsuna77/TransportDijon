@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -184,13 +185,15 @@ public class SearchActivity extends Activity {
 	       
         diviabdd.open();
         Lignes l = (Lignes) line_list.getSelectedItem();
-        myLog.write(TAG, "Ligne s�lectionn� : "+l.toString());
+        myLog.write(TAG, "Ligne sélectionné : "+l.toString());
         list_station= diviabdd.getAllStations(l);
         if (list_station != null){
 	        try{
 	        	station_list = (Spinner) findViewById(R.id.spinner_station);
 		    	ArrayAdapter<KeolisStation> adapter = new ArrayAdapter<KeolisStation>(this, android.R.layout.simple_list_item_1, list_station);
+		    	
 		    	station_list.setAdapter(adapter);
+		    	
 			}catch(Exception e){
 				myLog.write(TAG, e.getMessage());
 			}
