@@ -53,7 +53,7 @@
     <string name="pref_refresh_totem_title">Màj des totems</string>
     <string name="title_activity_about">A propos</string>
     <string name="action_about">A propos</string>
-    <string name="pref_refresh_totem_msg">Temps entre deux mise à jour des totem en seconde(par défaut 40sec)</string>
+    <string name="pref_refresh_totem_msg">Temps entre deux mises à jour des totem en secondes(par défaut 40sec)</string>
     <string name="about_text">L\'application TransportDijon a été réalisée dans le but de fournir une application rapide permettant de consulter les horaires des transports commun de Dijon.\n\nIl y a actuellement 1 developpeur :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nJe tiens à remercier tous ceux qui m\'ont aidé à la réalisation de ce projets et plus particulièrement Louis F, Hervé DS, Tonio (ton logo est superbe) et tous les membres de la communauté de test de l\'application.\n\nVersion : %1$s</string>
     <string name="context_menu_title">Gerer favoris</string>
     <string name="context_menu_supress">Supprimer</string>
