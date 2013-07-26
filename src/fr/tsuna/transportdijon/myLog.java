@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class myLog {
 	private static Boolean debug=true;
-	public static final String working_folder=Environment.getExternalStorageDirectory().toString()+"/diviaTotem/";
+	public static final String working_folder=Environment.getExternalStorageDirectory().toString()+"/TransportDijon/";
 	public static final String log_file="divia.log";
 	public static final String log_fullpath=working_folder+log_file;
 	
