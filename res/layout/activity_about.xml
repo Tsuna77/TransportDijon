@@ -10,9 +10,8 @@
     tools:context=".AboutActivity" >
 	<TextView 
 	    android:id="@+id/txt_about"
-		android:text="@string/about_text"
+		android:text=""
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-	/>"
-
+	/>
 </ScrollView>

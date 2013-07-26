@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.annotation.TargetApi;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
 public class AboutActivity extends Activity {
+	private static final String TAG = "TransportDijon";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +20,18 @@ public class AboutActivity extends Activity {
 		setContentView(R.layout.activity_about);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		TextView about_txt = (TextView) findViewById(R.id.txt_about);
+        PackageManager manager = this.getPackageManager();
+		PackageInfo info;
+		try {
+			info = manager.getPackageInfo(this.getPackageName(), 0);
+			about_txt.setText(getString(R.string.about_text,info.versionName));
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			myLog.write(TAG, e.getMessage(),myLog.ERROR);
+		}
+		
 	}
 
 	/**
