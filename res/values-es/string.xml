@@ -9,7 +9,7 @@
     <string name="chose_this_line">Choisissez une ligne :</string>
     <string name="cur_line">Ligne choisie : </string>
     <string name="chose_station">Choisissez un arrêt :</string>
-    <string name="Direction">Direction</string>
+    <string name="Direction">Destination</string>
     <string name="NC">NC</string>
     <string name="temps_restant">Temps restant</string>
     <string name="refresh_time">Actualiser</string>
