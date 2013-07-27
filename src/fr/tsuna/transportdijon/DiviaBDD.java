@@ -115,9 +115,6 @@ public class DiviaBDD {
 	
 	public void fillinLineTable(List<Lignes> lignes){
 		
-		if (lignes.size() <= 45){
-			return;	// pas assez d'information
-		}
 		bdd.delete(MyDB.TABLE_LIGNE, "1=1", null);
 		for (Lignes ligne : lignes){
 			myLog.write(TAG, ligne.toString());

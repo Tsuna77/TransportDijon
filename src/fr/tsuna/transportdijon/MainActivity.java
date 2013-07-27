@@ -351,7 +351,7 @@ public class MainActivity extends Activity {
     		diviabdd.fillinStationTable(station_name, ligne);
     	}
 		TextToConsole(getString(R.string.loading_finished));
-		locked = false;	// d�sactivation du v�rouillage des commandes
+		locked = false;	// désactivation du vérouillage des commandes
         diviabdd.close();
 		if (first_launch){
 			startSearch();
@@ -375,7 +375,7 @@ public class MainActivity extends Activity {
     private synchronized void refresh_line_thread(){
     	if (locked){return;}
     	if (force_refresh){
-    		myLog.write(TAG, "Mise � jour forc�", Log.WARN);
+    		myLog.write(TAG, "Mise à jour forcé", Log.WARN);
     	}
     	locked = true;
     	DiviaBDD diviadb = new DiviaBDD(getApplicationContext());
@@ -477,19 +477,16 @@ public class MainActivity extends Activity {
     }
 
     public void startSettings(){
-    	if (locked){return;}
     		Intent intent = new Intent(this, SettingsActivity.class );
     		startActivityForResult(intent,0);
     }
 
     public void startAbout(){
-    	if (locked){return;}
     		Intent intent = new Intent(this, AboutActivity.class );
     		startActivityForResult(intent,0);
     }
     public void startSearch(){
 
-    	if (locked){return;}
 		DiviaBDD diviadb = new DiviaBDD(getApplicationContext());
     	diviadb.open();
     	String test = diviadb.getParam(MyDB.LAST_LINE_UPDATE);
@@ -507,20 +504,22 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-        	case R.id.action_settings:
-        		startSettings();
-        		break;
-        	case R.id.acton_refresh:
-        		update_time();
-        		break;
-        	case R.id.action_addTotem:
-        		startSearch();
-        		break;
-        	case R.id.action_about:
-        		startAbout();
-        		break;
-        }
+    	if (!locked){
+	        switch (item.getItemId()) {
+	        	case R.id.action_settings:
+	        		startSettings();
+	        		break;
+	        	case R.id.acton_refresh:
+	        		update_time();
+	        		break;
+	        	case R.id.action_addTotem:
+	        		startSearch();
+	        		break;
+	        	case R.id.action_about:
+	        		startAbout();
+	        		break;
+	        }
+    	}
         return super.onOptionsItemSelected(item);
     }
     
