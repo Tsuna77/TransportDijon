@@ -64,7 +64,7 @@ public class DiviaBDD {
 				"'"+lignes.getSens()+"',"+
 				"'"+lignes.getVers()+"',"+
 				"'"+lignes.getCouleur()+"')"+
-				";");
+				";\");");
 		
 		return bdd.insert(MyDB.TABLE_LIGNE, null,values);
 	}
@@ -90,7 +90,7 @@ public class DiviaBDD {
 				"'"+station.getRef()+"',"+
 				"'"+ligne.getCode()+"',"+
 				"'"+ligne.getSens()+"')"+
-				";");
+				";\");");
 		
 		return bdd.insert(MyDB.TABLE_STATION, null,values);
 	}
