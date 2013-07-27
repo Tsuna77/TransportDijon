@@ -15,6 +15,7 @@ public class Lignes {
 		this.setSens(sens);
 		this.setCouleur(couleur);
 		this.setVers(vers);
+		
 	}
 
 	public String getCode() {

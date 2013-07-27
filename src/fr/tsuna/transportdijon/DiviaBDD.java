@@ -52,6 +52,20 @@ public class DiviaBDD {
 		values.put(MyDB.LIGNE_SENS, lignes.getSens());
 		values.put(MyDB.LIGNE_VERS, lignes.getVers());
 		
+		myLog.write("BDD_test", "db.execSQL(\"" +
+				"insert into \"+TABLE_LIGNE+\" " +
+				"('\"+LIGNE_CODE+\"'," +
+				"'\"+LIGNE_NOM+\"'," +
+				"'\"+LIGNE_SENS+\"'," +
+				"'\"+LIGNE_VERS+\"'," +
+				"'\"+LIGNE_COLOR\")" +
+				" VALUES ('"+lignes.getCode()+"',"+
+				"'"+lignes.getNom()+"',"+
+				"'"+lignes.getSens()+"',"+
+				"'"+lignes.getVers()+"',"+
+				"'"+lignes.getCouleur()+"')"+
+				";");
+		
 		return bdd.insert(MyDB.TABLE_LIGNE, null,values);
 	}
 
@@ -64,6 +78,19 @@ public class DiviaBDD {
 		values.put(MyDB.STATION_LIGNE_CODE, ligne.getCode());
 		values.put(MyDB.STATION_LIGNE_SENS, ligne.getSens());
 		
+		myLog.write("BDD_test", "db.execSQL(\"" +
+				"insert into \"+TABLE_STATION+\" " +
+				"('\"+STATION_CODE+\"'," +
+				"'\"+STATION_NOM+\"'," +
+				"'\"+STATION_REFS+\"'," +
+				"'\"+STATION_LIGNE_CODE+\"'," +
+				"'\"+STATION_LIGNE_SENS\")" +
+				" VALUES ('"+station.getCode()+"',"+
+				"'"+station.getNom()+"',"+
+				"'"+station.getRef()+"',"+
+				"'"+ligne.getCode()+"',"+
+				"'"+ligne.getSens()+"')"+
+				";");
 		
 		return bdd.insert(MyDB.TABLE_STATION, null,values);
 	}

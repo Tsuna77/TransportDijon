@@ -127,7 +127,7 @@ public class KeolisParser extends AsyncTask<Object, Object, Object> {
 				parser.setInput(result, null);
 				parser.nextTag();
 				parser.require(XmlPullParser.START_TAG, ns, "xmldata");
-				parser.nextTag(); 	// arriv� sur erreur
+				parser.nextTag(); 	// arrivé sur erreur
 				Log.d(TAG, "Code Erreur re�u : "+parser.getAttributeValue(0));
 				goToTag(parser, "heure");
 				tmp_heure = readText(parser);
