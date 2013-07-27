@@ -84,7 +84,7 @@ public class DiviaBDD {
 				"'\"+STATION_NOM+\"'," +
 				"'\"+STATION_REFS+\"'," +
 				"'\"+STATION_LIGNE_CODE+\"'," +
-				"'\"+STATION_LIGNE_SENS\")" +
+				"'\"+STATION_LIGNE_SENS+\"')" +
 				" VALUES ('"+station.getCode()+"',"+
 				"'"+station.getNom()+"',"+
 				"'"+station.getRef()+"',"+
