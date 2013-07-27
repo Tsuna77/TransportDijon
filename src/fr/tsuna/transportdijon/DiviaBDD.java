@@ -226,7 +226,7 @@ public class DiviaBDD {
 	private String protectSpecialChars(String input){
 		String output;
 		
-		output = input.replaceAll("'","\'");
+		output = input.replaceAll("'","''");
 		
 		return output;
 	}
@@ -285,7 +285,7 @@ public class DiviaBDD {
 		String code=code_vers.split(" \\(")[0];
 		String vers=code_vers.split(" \\(")[1].replace(") ","");
 		
-		String sql="delete from "+MyDB.TABLE_FAV+" WHERE "+MyDB.FAV_CODE+"='"+code+"' AND "+MyDB.FAV_NOM+"='"+station+"' AND "+MyDB.FAV_VERS+"='"+vers+"'";
+		String sql="delete from "+MyDB.TABLE_FAV+" WHERE "+MyDB.FAV_CODE+"='"+protectSpecialChars(code)+"' AND "+MyDB.FAV_NOM+"='"+protectSpecialChars(station)+"' AND "+MyDB.FAV_VERS+"='"+protectSpecialChars(vers)+"'";
 		Cursor rep=bdd.rawQuery(sql, null);
 		
 		rep.moveToFirst();
