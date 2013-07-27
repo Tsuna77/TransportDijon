@@ -210,21 +210,48 @@ public class DiviaBDD {
 		}
 		return code;
 	}
-	
-	public void addFav(KeolisStation station, Lignes ligne){
-		// mise en favorie de l'arr�t
-		ContentValues values = new ContentValues();
-
-		values.put(MyDB.FAV_CODE,ligne.getNom());
-		values.put(MyDB.FAV_NOM,station.getNom());
-		values.put(MyDB.FAV_REFS,station.getRef());
-		values.put(MyDB.FAV_VERS,ligne.getVers());
-		values.put(MyDB.FAV_POS, getMaxPosFav() +1);
-		try{
-			bdd.insertOrThrow(MyDB.TABLE_FAV, null, values);
-		}catch(Exception e){
-			myLog.write(TAG, "Impossible de mettre l'arr�t en favori");
+	private boolean alreadyInFav(KeolisStation station, Lignes ligne){
+		boolean result = true;
+		String sql = "SELECT COUNT(*) FROM "+MyDB.TABLE_FAV+" WHERE "
+				+ MyDB.FAV_CODE + "='"+protectSpecialChars(ligne.getNom())+"' AND "
+				+ MyDB.FAV_NOM + "='"+protectSpecialChars(station.getNom())+"' AND "
+				+ MyDB.FAV_REFS + "='"+station.getRef()+"' AND "
+				+ MyDB.FAV_VERS + "='"+protectSpecialChars(ligne.getVers())+"'";
+		Cursor c = bdd.rawQuery(sql, null);
+		c.moveToFirst();
+		if (c.getInt(0) == 0)
+			result= false;
+		return result;
+	}
+	private String protectSpecialChars(String input){
+		String output;
+		
+		output = input.replaceAll("'","\'");
+		
+		return output;
+	}
+	public int addFav(KeolisStation station, Lignes ligne){
+		int result = 0;
+		// mise en favori de l'arrêt
+		if ( alreadyInFav(station, ligne)){
+			result = 1;
 		}
+		else{
+			ContentValues values = new ContentValues();
+	
+			values.put(MyDB.FAV_CODE,ligne.getNom());
+			values.put(MyDB.FAV_NOM,station.getNom());
+			values.put(MyDB.FAV_REFS,station.getRef());
+			values.put(MyDB.FAV_VERS,ligne.getVers());
+			values.put(MyDB.FAV_POS, getMaxPosFav() +1);
+			try{
+				bdd.insertOrThrow(MyDB.TABLE_FAV, null, values);
+			}catch(Exception e){
+				myLog.write(TAG, "Impossible de mettre l'arrêt en favori");
+				result = 2;
+			}
+		}
+		return result;
 	}
 	
 	public int getMaxPosFav(){

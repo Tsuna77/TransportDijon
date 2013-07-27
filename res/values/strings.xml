@@ -57,4 +57,7 @@
     <string name="about_text">L\'application TransportDijon a été réalisée dans le but de fournir une application rapide permettant de consulter les horaires des transports commun de Dijon.\n\nIl y a actuellement 1 developpeur :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nJe tiens à remercier tous ceux qui m\'ont aidé à la réalisation de ce projets et plus particulièrement Louis F, Hervé DS, Tonio (ton logo est superbe) et tous les membres de la communauté de test de l\'application.\nMerci aux traducteurs de l\'application :\n - Caro pour son anglais\n - Hervé pour l\'allemand\n - Ginou pour l\'espagnole\n\nVersion : %1$s</string>
     <string name="context_menu_title">Gérer les favoris</string>
     <string name="context_menu_supress">Supprimer</string>
+    <string name="already_in_fav">Cette arrêt est déjà dans les favoris</string>
+    <string name="adding_error">Impossible d\'ajouter le favoris</string>
+    <string name="OK">OK</string>
 </resources>

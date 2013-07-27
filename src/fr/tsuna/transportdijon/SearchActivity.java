@@ -101,19 +101,31 @@ public class SearchActivity extends Activity {
        	Lignes current_line = (Lignes) line_list.getSelectedItem();
        	KeolisStation current_station = (KeolisStation) station_list.getSelectedItem();
        	 
-		bdd.addFav(current_station, current_line);
+		int result = bdd.addFav(current_station, current_line);
 		
 		bdd.close();
 		
 		AlertDialog.Builder adb = new AlertDialog.Builder(SearchActivity.this);
     	adb.setTitle(R.string.popup_add_to_fav);
-    	adb.setMessage(R.string.popup_add_text);
-    	adb.setNegativeButton(R.string.stay,null);
-    	adb.setPositiveButton(R.string.retour, new AlertDialog.OnClickListener(){
-    		public void onClick(DialogInterface dialog, int arg1){
-    			onBackPressed();
-    		}
-    	});
+    	if (result == 0){
+    		adb.setMessage(R.string.popup_add_text);
+        	adb.setNegativeButton(R.string.stay,null);
+        	adb.setPositiveButton(R.string.retour, new AlertDialog.OnClickListener(){
+        		public void onClick(DialogInterface dialog, int arg1){
+        			onBackPressed();
+        		}
+        	});
+    	}
+    	else if (result == 1){
+    		adb.setMessage(R.string.already_in_fav);
+	    	adb.setCancelable(false);
+	    	adb.setPositiveButton(R.string.retour, null);
+    	}
+    	else{
+    		adb.setMessage(R.string.adding_error);
+	    	adb.setCancelable(false);
+	    	adb.setPositiveButton(R.string.OK, null);
+    	}
     	adb.show();
 		
 	}
