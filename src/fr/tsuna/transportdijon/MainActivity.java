@@ -29,8 +29,6 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "TransportDijon";
-	private List<Lignes> line_name;
-	List<KeolisStation> station_name = new ArrayList<KeolisStation>();
 	boolean force_refresh=false;
 	boolean refresh=false;
 	String console_msg = "";
@@ -214,7 +212,6 @@ public class MainActivity extends Activity {
         
        
         diviabdd.open();
-    	line_name=diviabdd.getAllLines();
         
         // chargement des parametres
         String last_line_update = diviabdd.getParam(MyDB.LAST_LINE_UPDATE);
@@ -353,7 +350,7 @@ public class MainActivity extends Activity {
 			 }
 		 }
 		 else{
-			 type_connexion="Non connect�";
+			 type_connexion="Non connecté";
 		 }
 		 String s="Debug-infos:";
 		 s += "\n OS Kernel Version: " + System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
@@ -380,18 +377,8 @@ public class MainActivity extends Activity {
     }
     public void startSearch(){
 
-		DiviaBDD diviadb = new DiviaBDD(getApplicationContext());
-    	diviadb.open();
-    	String test = diviadb.getParam(MyDB.LAST_LINE_UPDATE);
-    	diviadb.close();
-    	if (test.equals("0")){
-
-        	Toast.makeText(this, getString(R.string.no_line), Toast.LENGTH_SHORT).show();
-    	}
-    	else{
-    		Intent intent = new Intent(this, SearchActivity.class );
-    		startActivityForResult(intent,0);
-    	}
+    	Intent intent = new Intent(this, SearchActivity.class );
+    	startActivityForResult(intent,0);
     }
     
     @Override

@@ -72,19 +72,16 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		diviabdd.open();
 
-        int refresh_line = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_LINE));	
         int totem_refresh = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_TOTEM));
 
 		
 		diviabdd.close();
 		
-		Preference line_pref = (Preference) findPreference(MyDB.REFRESH_LINE);
 		Preference totem_pref = (Preference) findPreference(MyDB.REFRESH_TOTEM);
 		
 
 		//myLog.write(TAG, "Settings = "+SP.getString(MyDB.REFRESH_LINE, ""));
 
-		line_pref.setDefaultValue(refresh_line);
 		totem_pref.setDefaultValue(totem_refresh);
 		
 	}
@@ -95,7 +92,6 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		ArrayList<String> list_param = new ArrayList<String>();
-		list_param.add(MyDB.REFRESH_LINE);
 		list_param.add( MyDB.REFRESH_TOTEM);
 		
         DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
