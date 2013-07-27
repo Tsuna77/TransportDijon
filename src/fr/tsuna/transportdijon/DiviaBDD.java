@@ -1,5 +1,9 @@
 package fr.tsuna.transportdijon;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,6 +155,19 @@ public class DiviaBDD {
 			close();
 		}
 		
+	}
+
+	public void insertFromFile(Context context, int resourceId) throws IOException {
+	    // Open the resource
+	    InputStream insertsStream = context.getResources().openRawResource(resourceId);
+	    BufferedReader insertReader = new BufferedReader(new InputStreamReader(insertsStream));
+	
+	    // Iterate through lines (assuming each insert has its own line and theres no other stuff)
+	    while (insertReader.ready()) {
+	        String insertStmt = insertReader.readLine();
+	        bdd.execSQL(insertStmt);
+	    }
+	    insertReader.close();
 	}
 	
 	public boolean asFavoris(){

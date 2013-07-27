@@ -13,13 +13,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -32,7 +29,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "TransportDijon";
-	private List<Lignes> line_name=new ArrayList<Lignes>();
+	private List<Lignes> line_name;
 	List<KeolisStation> station_name = new ArrayList<KeolisStation>();
 	boolean force_refresh=false;
 	boolean refresh=false;
@@ -217,6 +214,7 @@ public class MainActivity extends Activity {
         
        
         diviabdd.open();
+    	line_name=diviabdd.getAllLines();
         
         // chargement des parametres
         String last_line_update = diviabdd.getParam(MyDB.LAST_LINE_UPDATE);
@@ -234,18 +232,7 @@ public class MainActivity extends Activity {
         
         myLog.write(TAG, "last_line_update="+last_line_update);
         myLog.write(TAG, "refresh_line="+refresh_line);
-        
-        long tsLong = System.currentTimeMillis()/1000;
-        int next_time = Integer.parseInt(last_line_update)+(refresh_line);
-        int left_time = next_time - (int)tsLong;
-        
-        if ( next_time < tsLong || force_refresh){
-        	refresh_line_thread();
-        }
-        else{
-        	//Toast.makeText(getApplicationContext(), getString(R.string.next_update_in,leftTimeToString(left_time)), Toast.LENGTH_SHORT).show();
-        	myLog.write(TAG, getString(R.string.next_update_in,leftTimeToString(left_time)));
-        }
+
         //*
         // sauvegarde des paramètres
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -321,43 +308,6 @@ public class MainActivity extends Activity {
     	
     }
     
-    private synchronized void refresh_line(){
-    	
-		// récupération des lignes via l'api
-    	line_name.clear();
-		DiviaBDD diviabdd = new DiviaBDD(this);
-		
-    	try {
-            diviabdd.open();
-    		line_name=new KeolisParser().parseLine();
-    		diviabdd.fillinLineTable(line_name);
-
-		}catch (Exception e) {
-			myLog.write(TAG, e.getMessage(),myLog.ERROR);
-		}
-    	TextToConsole(getString(R.string.line_loading_finished));
-    	
-    	// mise à jour des informations de chaques lignes
-    	
-    	for (Lignes ligne: line_name) {
-    		TextToConsole(getString(R.string.loading_station_x, ligne.getNom()+" ("+ligne.getVers()+")"));
-    		try {
-				station_name = new KeolisParser().parse_station(ligne);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (XmlPullParserException e) {
-				e.printStackTrace();
-			}
-    		diviabdd.fillinStationTable(station_name, ligne);
-    	}
-		TextToConsole(getString(R.string.loading_finished));
-		locked = false;	// désactivation du vérouillage des commandes
-        diviabdd.close();
-		if (first_launch){
-			startSearch();
-		}
-    }
-
     
     private void TextToConsole(String message){
     	console_msg=message;
@@ -372,63 +322,6 @@ public class MainActivity extends Activity {
 		});
     }
     
-    private synchronized void refresh_line_thread(){
-    	if (locked){return;}
-    	if (force_refresh){
-    		myLog.write(TAG, "Mise à jour forcé", Log.WARN);
-    	}
-    	locked = true;
-    	DiviaBDD diviadb = new DiviaBDD(getApplicationContext());
-    	diviadb.open();
-    	String test = diviadb.getParam(MyDB.LAST_LINE_UPDATE);
-    	diviadb.close();
-
-    	
-    	if (test.equals("0")){
-    		// on ne demande pas, mise � jour obligatoire car sinon aucune action possible dans l'appli
-    		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-    		adb.setTitle(R.string.refresh);
-    		adb.setMessage(R.string.refresh_force_info);
-    		adb.setCancelable(false);
-    		adb.setPositiveButton(R.string.confirm, new AlertDialog.OnClickListener(){
-	    		public void onClick(DialogInterface dialog, int arg1){
-	    			threaded_refresh();
-	    		}
-	    	});
-	    	adb.show();
-    	}
-    	else{
-	    	// on demande avant de rafraichir car cela prend un certain temps et un temps certain.
-	    	AlertDialog.Builder adb = new AlertDialog.Builder(this);
-	    	refresh = false;
-	    	adb.setTitle(R.string.refresh);
-	    	adb.setMessage(R.string.confirm_refresh);
-	    	adb.setNegativeButton(R.string.cancel, null);
-	    	adb.setPositiveButton(R.string.confirm, new AlertDialog.OnClickListener(){
-	    		public void onClick(DialogInterface dialog, int arg1){
-	    			threaded_refresh();
-	    		}
-	    	});
-	    	adb.show();
-    	}
-
-		
-    }
-    
-    private void threaded_refresh(){
-
-    	new Thread(new Runnable() { 
-            public void run() {
-            	myLog.write(TAG,"Début du thread de mise à jour des lignes");
-
-                refresh_line();
-            } 
-       }).start();
-
-    	TextToConsole(getString(R.string.line_loading));
-    }
-    
-  
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

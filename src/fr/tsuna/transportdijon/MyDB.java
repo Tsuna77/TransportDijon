@@ -1,4 +1,5 @@
 package fr.tsuna.transportdijon;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -6,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 
 public class MyDB extends SQLiteOpenHelper {
-	private static final int VERSION_BDD = 18;
+	private static final int VERSION_BDD = 19;
 	
 	
 	public static final String TABLE_LIGNE = "lignes";
@@ -89,6 +90,73 @@ public class MyDB extends SQLiteOpenHelper {
 		db.execSQL(ADD_LAST_LINE_UPDATE);
 		db.execSQL(ADD_REFRESH_LINE);
 		db.execSQL(ADD_REFRESH_TOTEM);
+		insert_KeolisLine(db);
+	}
+	
+	private void insert_KeoLine(SQLiteDatabase db,String code, String nom, String sens, String vers, String couleur){
+		db.execSQL("insert into "+TABLE_LIGNE+" ('"+LIGNE_CODE+"','"+LIGNE_NOM+"','"+LIGNE_SENS+"','"+LIGNE_VERS+"','"+LIGNE_COLOR+"') VALUES ('"+code+"','"+nom+"','"+sens+"','"+vers+"','"+couleur+"');");
+		
+	}
+	
+	private void insert_KeolisLine(SQLiteDatabase db){
+		insert_KeoLine(db,"T1","T1","A","QUETIGNY","13369548");
+		insert_KeoLine(db,"T1","T1","R","Dijon Gare","13369548");
+		insert_KeoLine(db,"T2","T2","A","Valmy","13369548");
+		insert_KeoLine(db,"T2","T2","R","CHENOVE Centre","13369548");
+		insert_KeoLine(db,"03","L3","A","Fontaine d''Ouche","13369548");
+		insert_KeoLine(db,"03","L3","R","Epirey Cap Nord","13369548");
+		insert_KeoLine(db,"04","L4","A","CHENOVE Centre Commercial","13369548");
+		insert_KeoLine(db,"04","L4","R","Nation","13369548");
+		insert_KeoLine(db,"05","L5","A","TALANT Dullin","13369548");
+		insert_KeoLine(db,"05","L5","R","Université","13369548");
+		insert_KeoLine(db,"06","L6","A","Toison d'Or / Zénith","13369548");
+		insert_KeoLine(db,"06","L6","R","LONGVIC","13369548");
+		insert_KeoLine(db,"07","L7","A","QUETIGNY Europe","13369548");
+		insert_KeoLine(db,"07","L7","R","CHEVIGNY","13369548");
+		insert_KeoLine(db,"DIV","City","A","République","13369395");
+		insert_KeoLine(db,"DIV","City","R","Darcy","13369395");
+		insert_KeoLine(db,"11","11","A","Parc de la Colombière","6710988");
+		insert_KeoLine(db,"11","11","R","SAINT-APOLLINAIRE Val Sully","6710988");
+		insert_KeoLine(db,"12","12","A","Chicago","6710988");
+		insert_KeoLine(db,"12","12","R","PLOMBIERES","6710988");
+		insert_KeoLine(db,"13","13","A","Fontaine Village","6710988");
+		insert_KeoLine(db,"13","13","R","Motte Giron","6710988");
+		insert_KeoLine(db,"14","14","A","MARSANNAY Charon","6710988");
+		insert_KeoLine(db,"14","14","R","Sainte-Anne","6710988");
+		insert_KeoLine(db,"15","15","A","Montagne de Larrey","6710988");
+		insert_KeoLine(db,"15","15","R","PERRIGNY","6710988");
+		insert_KeoLine(db,"16","16","A","QUETIGNY allées Cavalières","6710988");
+		insert_KeoLine(db,"16","16","R","CRIMOLOIS","6710988");
+		insert_KeoLine(db,"17","17","A","Collège Clos de Pouilly","6710988");
+		insert_KeoLine(db,"17","17","R","AHUY","6710988");
+		insert_KeoLine(db,"18","18","A","Longvic Carmélites","6710988");
+		insert_KeoLine(db,"18","18","R","Square Darcy","6710988");
+		insert_KeoLine(db,"19","19","A","St-Apollinaire Pré Thomas","6710988");
+		insert_KeoLine(db,"19","19","R","Parc des Sports","6710988");
+		insert_KeoLine(db,"20","20","A","Dubois","6710988");
+		insert_KeoLine(db,"20","20","R","HAUTEVILLE","6710988");
+		insert_KeoLine(db,"21","21","A","BRETENIERE","6710988");
+		insert_KeoLine(db,"21","21","R","LONGVIC Centre","6710988");
+		insert_KeoLine(db,"22","22","A","FENAY","6710988");
+		insert_KeoLine(db,"22","22","R","LONGVIC Centre","6710988");
+		insert_KeoLine(db,"23","23","A","Les Ateliers","6710988");
+		insert_KeoLine(db,"23","23","R","Vieux Bourg","6710988");
+		insert_KeoLine(db,"30","30","A","Bressey","6710988");
+		insert_KeoLine(db,"30","30","R","Grand Marché","6710988");
+		insert_KeoLine(db,"31","31","A","Grand Marché","6710988");
+		insert_KeoLine(db,"31","31","R","Magny","6710988");
+		insert_KeoLine(db,"32","32","A","Complexe Funéraire","6710988");
+		insert_KeoLine(db,"32","32","R","Piscine Olympique","6710988");
+		insert_KeoLine(db,"33","33","A","FLAVIGNEROT","6710988");
+		insert_KeoLine(db,"33","33","R","Monge","6710988");
+		insert_KeoLine(db,"","Express","A","BA 102","6710988");
+		insert_KeoLine(db,"","Express","R","Gare SNCF","6710988");
+		insert_KeoLine(db,"","Flexo 40","A","République","6710988");
+		insert_KeoLine(db,"","Flexo 40","R","Toison d''Or","6710988");
+		insert_KeoLine(db,"","Flexo 41","A","Chevigny ZI","6710988");
+		insert_KeoLine(db,"","Flexo 41","R","Grand Marché","6710988");
+		insert_KeoLine(db,"","Pleine Lune","A","Toison d''Or","6710988");
+		insert_KeoLine(db,"","Pleine Lune","R","Université","6710988");
 	}
 
 	@Override
