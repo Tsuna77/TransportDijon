@@ -1,10 +1,7 @@
 package fr.tsuna.transportdijon;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 
 import android.net.ConnectivityManager;
@@ -24,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
