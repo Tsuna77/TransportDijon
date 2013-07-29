@@ -71,7 +71,7 @@ public class SettingsActivity extends PreferenceActivity {
 		DiviaBDD diviabdd = new DiviaBDD(SettingsActivity.this);
 		
 		diviabdd.open();
-
+		
         int totem_refresh = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_TOTEM));
 
 		
@@ -98,8 +98,13 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		diviabdd.open();
 		for (String param : list_param) {
+			try{
+				Integer.parseInt(sharedPreferences.getString(param, "20"));
+				diviabdd.setParam(param, sharedPreferences.getString(param, "20"));
+			}
+			catch(Exception e){
+			}
 			
-			diviabdd.setParam(param, sharedPreferences.getString(param, "24"));
 		}
 		
 		diviabdd.close();

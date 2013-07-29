@@ -54,7 +54,12 @@ public class MainActivity extends Activity {
     	// on recharge la liste des favoris en cas de mise à jour
     	DiviaBDD diviadb = new DiviaBDD(MainActivity.this);
     	diviadb.open();
-        totem_refresh = Integer.parseInt(diviadb.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
+    	try{
+    		totem_refresh = Integer.parseInt(diviadb.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
+    	}
+    	catch(Exception e){
+    		myLog.write(TAG, e.getMessage(), myLog.ERROR);
+    	}
     	fav_list=diviadb.getAllFav();
     	if (fav_list == null){
     		// il n'y a plus de favoris, redirection vers la page de recherche
@@ -215,8 +220,13 @@ public class MainActivity extends Activity {
         
         // chargement des parametres
         String last_line_update = diviabdd.getParam(MyDB.LAST_LINE_UPDATE);
-        String totem_refresh_db = diviabdd.getParam(MyDB.REFRESH_TOTEM);	
-        totem_refresh = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
+        String totem_refresh_db = diviabdd.getParam(MyDB.REFRESH_TOTEM);
+        try{
+        	totem_refresh = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
+        }
+        catch(Exception e){
+        	myLog.write(TAG, e.getMessage(), myLog.ERROR);
+        }
 
         if (!last_line_update.equals("0")){
         	first_launch = false;
