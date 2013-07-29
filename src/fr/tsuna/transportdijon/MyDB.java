@@ -85,7 +85,6 @@ public class MyDB extends SQLiteOpenHelper {
 		db.execSQL(CREATE_FAV);
 		db.execSQL(CREATE_STATION);
 		db.execSQL(ADD_LAST_LINE_UPDATE);
-		db.execSQL(ADD_REFRESH_LINE);
 		db.execSQL(ADD_REFRESH_TOTEM);
 		insert_KeolisLine(db);
 	}
