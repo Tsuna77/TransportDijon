@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">TransportDijon</string>
+    <string name="action_settings">Parametern</string>
+    <string name="nav_to_settings_text">Parametern</string>
+    <string name="refresh">Neuladen</string>
+    <string name="reload">Neuladen in Arbeit</string>
+    <string name="chose_this_line">Wählen Sie eine Linie :</string>
+    <string name="cur_line">ausgewählte Linie : </string>
+    <string name="chose_station">Wählen Sie eine Haltestelle :</string>
+    <string name="Direction">Ziel</string>
+    <string name="NC">NC</string>
+    <string name="temps_restant">restliche Zeit</string>
+    <string name="refresh_time">Aktualisieren</string>
+    <string name="Cant_connect">Server Verbindung nicht möglich</string>
+    <string name="error_in_work">Ein Fehler ist während der Verarbeitung aufgetreten</string>
+    <string name="line_loading">Laden der Liste der Linien</string>
+    <string name="station_loading">Laden der Haltestellen</string>
+    <string name="time_loading">Laden der Zeiten</string>
+    <string name="updating">Aktualisierung in Arbeit</string>
+    <string name="quit">Verlassen</string>
+    <string name="bp_menu">Menü</string>
+    <string name="Titre_fav">Favoriten</string>
+    <string name="no_fav_saved">Kein Favorit gespeicher</string>
+    <string name="next_update_in">Nächste Aktualisierung der Linien in %1$s</string>
+    <string name="action_add">Neues Totem</string>
+    <string name="image_desc_star_logo">Star Logo</string>
+    <string name="title_activity_search">Haltestellensuche</string>
+    <string name="version">Version : %1$s</string>
+    <string name="nav_force_refresh_text">Aktualisierung</string>
+    <string name="line_loading_finished">Aktualisierung der Linien beendet</string>
+    <string name="loading_station_x">Laden der Linie : %1$s</string>
+    <string name="loading_finished">Laden beendet</string>
+    <string name="add_to_fav">Zu Favoriten hinzufügen</string>
+    <string name="confirm_refresh">Die Aktualisierung der Daten (Linien + Haltestellen) beginnt in Kürze\nDies kann mehrere Sekunden dauern und die Arbeit mit der App beinträchtigen.\nWenn Sie es nicht zulassen, sind die Daten nicht aktuell.\nWollen Sie fortfahren ?</string>
+    <string name="refresh_force_info">Die erste Aktualisierung beginnt in Kürze\nDies kann mehrere Sekunden dauern und die Arbeit mit der App beinträchtigen.</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="confirm">OK</string>
+    <string name="no_line">Keine Linie verf¨gbar im Speicher</string>
+    <string name="popup_add_to_fav">Favorit hinzugefügt</string>
+    <string name="popup_add_text">Ihre Haltestelle wurde Ihren Favoriten hinzugefügt.\nWollen Sie zurück zur Hauptfenster ?</string>
+    <string name="stay">Bleiben</string>
+    <string name="retour">Zurück</string>
+    <string name="no_time_available">Keine Zeiten verfügbar</string>
+    <!-- Ne pas modifier la syntax du line_title -->
+    <string name="line_title">%1$s (%3$s) : %2$s\n</string>
+    <string name="no_network">Keine Netzwerkverbindung</string>
+    <string name="menu_save">Speichern</string>
+    <string name="refresh_info_test">Autom. Aktual. %1$dsec</string>
+    <string name="pref_refresh_line_title">Aktual. der Linien</string>
+    <string name="pref_refresh_line_msg">Zeitraum bevor die Liniendaten als obsolet betrachtet werden (Standard 72 Std)</string>
+    <string name="pref_refresh_totem_title">Aktual. der totems</string>
+    <string name="title_activity_about">über uns</string>
+    <string name="action_about">über uns</string>
+    <string name="pref_refresh_totem_msg">Zeitraum zwischen 2 Aktualisierungen der Totems in Sekunden (Standard 40 Sek)</string>
+    <string name="about_text">Die Anwendung TransportDijon wurde mit dem Ziel eine schnelle Lösung die Fahrtzeiten des öffentlichen Verkehrs in Dijon zu finden realisiert.\n\nAktuell gibt es 1 Entwickler :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nIch möchte mich bei allen die mich bei diesem Projekt geholfen haben bedanken, une ins besonderen bei Louis F, Hervé DS, Tonio (dein Logo ist wunderschön) sowie bei den Leute aus der Testgemeinschat.\nDanke an den Übersetzern der App :\n - Caro für Englisch\n - Hervé für Deutsch\n - Ginou für Spanisch : %1$s</string>
+    <string name="context_menu_title">Favoriten verwalten</string>
+    <string name="context_menu_supress">Löschen</string>
+    <string name="already_in_fav">Diese Haltestelle ist schon in den Favoriten</string>
+    <string name="adding_error">Favorit hinzufügen nicht möglich</string>
+    <string name="OK">OK</string>
+</resources>
