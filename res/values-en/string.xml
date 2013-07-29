@@ -54,9 +54,12 @@
     <string name="title_activity_about">About</string>
     <string name="action_about">About</string>
     <string name="pref_refresh_totem_msg">Time between two favourite update(default 40sec)</string>
-    <string name="about_text">L\'application TransportDijon à été réaliser dans le but de fournir une application rapide permettant de consulter les horaires des transports commun de Dijon.\n\nIl y a actuellement 1 developpeur :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nJe tiens à remercier tous ceux qui m\'ont aidé à la réalisation de ce projets et plus particulièrement Louis F, Hervé DS, Tonio (ton logo est superbe) et tous les membres de la communauté de test de l\'application.</string>
+    <string name="about_text">TransportDijon was made to help travelers in the city of Dijon to check when bus or tram are comming.\n\nThere is 1 developer :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nI want to thanks all people that help me to make this project and more precisly Louis F, Hervé DS, Tonio and all members of the G+ apps community.</string>
     <string name="context_menu_title">Manage Favourite</string>
     <string name="context_menu_supress">Delete</string>
+    <string name="already_in_fav">This station is already in your favourits</string>
+    <string name="adding_error">It's impossible to add this favourites</string>
+    <string name="OK">OK</string>
     
 </resources>
 
