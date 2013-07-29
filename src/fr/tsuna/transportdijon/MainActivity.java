@@ -215,9 +215,7 @@ public class MainActivity extends Activity {
         
         // chargement des parametres
         String last_line_update = diviabdd.getParam(MyDB.LAST_LINE_UPDATE);
-        String ref_line_str = diviabdd.getParam(MyDB.REFRESH_LINE); 
         String totem_refresh_db = diviabdd.getParam(MyDB.REFRESH_TOTEM);	
-        int refresh_line = Integer.parseInt(ref_line_str)*3600;	// valeur en heures dans la DB mais besoin en seconde
         totem_refresh = Integer.parseInt(diviabdd.getParam(MyDB.REFRESH_TOTEM))*1000;	// valeur en seconde dans la DB mais besoin en milliseconde
 
         if (!last_line_update.equals("0")){
@@ -228,13 +226,11 @@ public class MainActivity extends Activity {
         }
         
         myLog.write(TAG, "last_line_update="+last_line_update);
-        myLog.write(TAG, "refresh_line="+refresh_line);
 
         //*
         // sauvegarde des paramètres
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		SharedPreferences.Editor editor = SP.edit();
-		editor.putString(MyDB.REFRESH_LINE, ref_line_str);
 		editor.putString(MyDB.REFRESH_TOTEM, totem_refresh_db);
 		editor.commit();
         //*/
