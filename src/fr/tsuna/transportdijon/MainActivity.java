@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
 	boolean updating = false;
 	boolean UI_reload = false;
 	int totem_refresh=20000;
+	boolean starting=true;
 
 	private Handler handler_horaire = new Handler();
 	private Runnable run_horaire = new Runnable() {public void run() {update_time();}}; 
@@ -74,7 +75,7 @@ public class MainActivity extends Activity {
     		myLog.write(TAG, e.getMessage(), myLog.ERROR);
     	}
     	fav_list=diviadb.getAllFav();
-    	if (fav_list == null){
+    	if (fav_list == null & starting){
     		// il n'y a plus de favoris, redirection vers la page de recherche
     		startSearch();
     		return;
@@ -268,7 +269,11 @@ public class MainActivity extends Activity {
         	msg.setText(getString(R.string.no_fav_saved));
         	linearLayout.addView(msg);
         	// redirection vers la page des totems
-        	startSearch();
+        	if (starting){
+        		// il n'y a plus de favoris, redirection vers la page de recherche
+        		startSearch();
+        		return;
+        	}
         	
         }
         diviabdd.close();
@@ -395,9 +400,12 @@ public class MainActivity extends Activity {
     		startActivityForResult(intent,0);
     }
     public void startSearch(){
-
-    	Intent intent = new Intent(this, SearchActivity.class );
-    	startActivityForResult(intent,0);
+    	if (starting){
+    		// il n'y a plus de favoris, redirection vers la page de recherche
+    		starting=false;
+        	Intent intent = new Intent(this, SearchActivity.class );
+        	startActivityForResult(intent,0);
+    	}
     }
     
     @Override
@@ -412,6 +420,7 @@ public class MainActivity extends Activity {
 	        		update_time();
 	        		break;
 	        	case R.id.action_addTotem:
+	        		starting=true;
 	        		startSearch();
 	        		break;
 	        	case R.id.action_about:

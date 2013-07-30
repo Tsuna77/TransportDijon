@@ -25,7 +25,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -232,6 +231,7 @@ public class SearchActivity extends Activity {
         }
         diviabdd.close();
 	}
+	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
