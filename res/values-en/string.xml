@@ -25,8 +25,8 @@
     <string name="action_settings">Settings</string>
     <string name="refresh">Reload</string>
     <string name="reload">Reloading</string>
-    <string name="chose_this_line">Chose a line :</string>
-    <string name="chose_station">Chose a station :</string>
+    <string name="chose_this_line">Choose a line :</string>
+    <string name="chose_station">Choose a station :</string>
     <string name="Direction">To</string>
     <string name="NC">NC</string>
     <string name="error_in_work">Error during analyse</string>
@@ -61,11 +61,11 @@
     <string name="title_activity_about">About</string>
     <string name="action_about">About</string>
     <string name="pref_refresh_totem_msg">Time between two favourite update(default 40sec)</string>
-    <string name="about_text">TransportDijon was made to help travelers in the city of Dijon to check when bus or tram are coming.\n\nThere is 1 developer :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nI want to thanks all people that help me to make this project and more precisely Louis F, Hervé DS, Tonio and all members of the G+ apps community.</string>
-    <string name="context_menu_title">Manage Favourite</string>
+    <string name="about_text">TransportDijon was made to help travelers in the city of Dijon check when a bus or a tram is getting near.\n\nThere is 1 developer :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nI want to thank all the people that have helped me achieve this project with special thanks to Louis F, Hervé DS, Tonio and all members of the G+ apps community.\n\n This app was translated by :\n- Hervé for deutsh\n- Caro for English\n- Ginou for Spanish</string>
+    <string name="context_menu_title">Manage Favourites</string>
     <string name="context_menu_supress">Delete</string>
-    <string name="already_in_fav">This station is already in your favourits</string>
-    <string name="adding_error">It\'s impossible to add this favourites</string>
+    <string name="already_in_fav">This station is already in your favourites</string>
+    <string name="adding_error">It is impossible to add this to your favourites</string>
     <string name="OK">OK</string>
     
 </resources>
