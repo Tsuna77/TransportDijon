@@ -129,6 +129,7 @@ public class MainActivity extends Activity {
             						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
             					}
             					catch(Exception e){
+            						horaire+="\n";
             						myLog.write(TAG, "Il n'y a qu'un seul horaire de disponible", myLog.WARNING);
             					}
             					
@@ -136,6 +137,7 @@ public class MainActivity extends Activity {
                      		}
           				}catch (Exception e) {
           					horaire+=getString(R.string.no_time_available);
+    						horaire+="\n";
           				}
                 		txt.setText(horaire);
                 		txt.setTextColor(getResources().getColor(R.color.white));
