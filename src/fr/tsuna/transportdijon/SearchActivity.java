@@ -171,10 +171,10 @@ public class SearchActivity extends Activity {
 					String horaire="Prochain passage : \n";
 
 					horaire+=((KeolisHoraire)list_horaire.get(0)).getDest()+"\t";
-					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
+					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time(getApplicationContext())+"\n";
 					try{
 						horaire+=((KeolisHoraire)list_horaire.get(1)).getDest()+"\t";
-						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
+						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time(getApplicationContext())+"\n";
 					}
 					catch(Exception e){
 						myLog.write(TAG, "Il n'y a qu'un seul horaire de disponible", myLog.WARNING);
@@ -192,7 +192,7 @@ public class SearchActivity extends Activity {
              public void run() { 
             	 Lignes current_line = (Lignes) line_list.getSelectedItem();
             	 KeolisStation current_station = (KeolisStation) station_list.getSelectedItem();
-            	 myLog.write(TAG,"D�but du thread de mise � jour des horaires");
+            	 myLog.write(TAG,"Début du thread de mise à jour des horaires");
             	 clear_result();
             	 try {
             		if (current_line.getVers() != ""){
