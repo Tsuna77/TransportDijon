@@ -17,6 +17,9 @@
  */
 package fr.tsuna.transportdijon;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 
 public class KeolisHoraire extends divia {
 	private String dest="";
@@ -58,7 +61,7 @@ public class KeolisHoraire extends divia {
 		this.refTime = refTime;
 	}
 	
-	public String get_Left_Time(){
+	public String get_Left_Time(Context ctx){
 		// renvoie le temps restant
 		String left = "";
 		
@@ -84,7 +87,7 @@ public class KeolisHoraire extends divia {
 		else{
 			int work_time = time_left;
 			myLog.write(TAG, "temps restant en minutes : "+time_left);
-			left="Dans ";
+			left=ctx.getResources().getString(R.string.In)+" ";
 			if (work_time >= 60){
 				// au moins 1 heure d'attente
 				int nb_heure = work_time/60;

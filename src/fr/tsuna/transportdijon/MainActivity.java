@@ -123,10 +123,10 @@ public class MainActivity extends Activity {
                  				horaire=horaire.replace("%3$s", fav.getVers());
 
             					horaire+=((KeolisHoraire)list_horaire.get(0)).getDest()+"\t";
-            					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time()+"\n";
+            					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time(getApplicationContext())+"\n";
             					try{
             						horaire+=((KeolisHoraire)list_horaire.get(1)).getDest()+"\t";
-            						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time()+"\n";
+            						horaire+=((KeolisHoraire)list_horaire.get(1)).get_Left_Time(getApplicationContext())+"\n";
             					}
             					catch(Exception e){
             						horaire+="\n";

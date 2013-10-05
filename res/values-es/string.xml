@@ -61,10 +61,14 @@
     <string name="title_activity_about">A proposito de</string>
     <string name="action_about">A proposito de</string>
     <string name="pref_refresh_totem_msg">Tiempo entre dos actualizaciones de los totem en secondos(por defecto 40sec)</string>
-    <string name="about_text">La aplicacion TransporteDijon fue realisada con meta de olar una aplicacion rápida para consultar los horarios de los transportes publicos en Dijon.\nAhora hay 1 desarrollador :\n Raphaël Ricordeau <a href="mailto:android@tsuna.fr">android@tsuna.fr</a>\n\nQuiero dar las gracias a las personas quien me ayuden en este projecto en particular Louis F, Hervé DS, Tonio y todos los miembros de la comunidad de test de la aplicacion\n\nGracias a los traductores de la aplicacion\nCaro por el Ingles\nHerve por el Aleman\nGinou por el Español.\n\nForma : %1$s</string>
+    <string name="about_text">La aplicacion TransporteDijon fue realisada con meta de olar una aplicacion rápida para consultar los horarios de los transportes publicos en Dijon.\nAhora hay 1 desarrollador :\n- Raphaël Ricordeau <a href="mailto:android@tsuna.fr">android@tsuna.fr</a>\n\nQuiero dar las gracias a las personas quien me ayuden en este projecto en particular Louis F, Hervé DS, Tonio y todos los miembros de la comunidad de test de la aplicacion\n\nGracias a los traductores de la aplicacion\n- Caro por el Ingles\n- Herve por el Aleman\n- Ginou por el Español.\n\nForma : %1$s</string>
     <string name="context_menu_title">Administrar las marcas</string>
     <string name="context_menu_supress">Borrar</string>
     <string name="already_in_fav">Esta parada ya está en las marcas</string>
     <string name="adding_error">No se puede agregar a las marcas</string>
     <string name="OK">OK</string>
+    
+    <!-- A traduire -->
+    <string name="In">In</string>
+    <string name="next">Next one in :</string>
 </resources>

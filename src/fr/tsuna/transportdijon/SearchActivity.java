@@ -154,7 +154,7 @@ public class SearchActivity extends Activity {
 			@Override
 			public void run() {
 				 TextView txt = (TextView)findViewById(R.id.search_result_info); 
-			   	 String horaire="Prochain passage : \n";
+			   	 String horaire=getString(R.string.next)+"\n";
 			   	 txt.setText(horaire);
 			}
 		});
@@ -166,9 +166,9 @@ public class SearchActivity extends Activity {
 			
 			@Override
 			public void run() {
+				TextView txt = (TextView)findViewById(R.id.search_result_info); 
 				if (!list_horaire.isEmpty()){
-					TextView txt = (TextView)findViewById(R.id.search_result_info); 
-					String horaire="Prochain passage : \n";
+					String horaire=getString(R.string.next)+"\n";
 
 					horaire+=((KeolisHoraire)list_horaire.get(0)).getDest()+"\t";
 					horaire+=((KeolisHoraire)list_horaire.get(0)).get_Left_Time(getApplicationContext())+"\n";
@@ -181,6 +181,9 @@ public class SearchActivity extends Activity {
 					}
 					
 					txt.setText(horaire);
+				}
+				else{
+					txt.setText(getString(R.string.no_time_available));
 				}
 				
 			}

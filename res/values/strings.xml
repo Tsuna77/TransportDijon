@@ -67,4 +67,6 @@
     <string name="already_in_fav">Cette arrêt est déjà dans les favoris</string>
     <string name="adding_error">Impossible d\'ajouter le favoris</string>
     <string name="OK">OK</string>
+    <string name="In">Dans</string>
+    <string name="next">Prochain passage dans :</string>
 </resources>

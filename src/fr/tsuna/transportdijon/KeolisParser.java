@@ -115,7 +115,7 @@ public class KeolisParser extends AsyncTask<Object, Object, Object> {
 
 	public List<KeolisHoraire> parser_horaire(String refs) throws IOException{
 		if (!isConnected()){
-			throw new IOException("R�seaux de donn�e non disponible");
+			throw new IOException("Réseaux de donnée non disponible");
 		}
 		List<KeolisHoraire> list_horaire = new ArrayList<KeolisHoraire>();
 		Boolean erreur = false;

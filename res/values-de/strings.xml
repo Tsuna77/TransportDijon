@@ -74,10 +74,14 @@
     <string name="title_activity_about">über uns</string>
     <string name="action_about">über uns</string>
     <string name="pref_refresh_totem_msg">Zeitraum zwischen 2 Aktualisierungen der Totems in Sekunden (Standard 40 Sek)</string>
-    <string name="about_text">Die Anwendung TransportDijon wurde mit dem Ziel eine schnelle Lösung die Fahrtzeiten des öffentlichen Verkehrs in Dijon zu finden realisiert.\n\nAktuell gibt es 1 Entwickler :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nIch möchte mich bei allen die mich bei diesem Projekt geholfen haben bedanken, une ins besonderen bei Louis F, Hervé DS, Tonio (dein Logo ist wunderschön) sowie bei den Leute aus der Testgemeinschat.\nDanke an den Übersetzern der App :\n - Caro für Englisch\n - Hervé für Deutsch\n - Ginou für Spanisch : %1$s</string>
+    <string name="about_text">Die Anwendung TransportDijon wurde mit dem Ziel eine schnelle Lösung die Fahrtzeiten des öffentlichen Verkehrs in Dijon zu finden realisiert.\n\nAktuell gibt es 1 Entwickler :\n- Raphaël Ricordeau <a href='mailto:android@tsuna.fr'>android@tsuna.fr</a>\n\nIch möchte mich bei allen die mich bei diesem Projekt geholfen haben bedanken, une ins besonderen bei Louis F, Hervé DS, Tonio (dein Logo ist wunderschön) sowie bei den Leute aus der Testgemeinschat.\nDanke an den Übersetzern der App :\n - Caro für Englisch\n - Hervé für Deutsch\n - Ginou für Spanisch\n\nVersion : %1$s</string>
     <string name="context_menu_title">Favoriten verwalten</string>
     <string name="context_menu_supress">Löschen</string>
     <string name="already_in_fav">Diese Haltestelle ist schon in den Favoriten</string>
     <string name="adding_error">Favorit hinzufügen nicht möglich</string>
     <string name="OK">OK</string>
+    
+    <!-- A traduire -->
+    <string name="In">In</string>
+    <string name="next">Next one in :</string>
 </resources>
