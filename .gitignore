@@ -1,3 +1,6 @@
 *.class
 /gen
 /bin
+app/release/*
+app/build/*
+.gradle
