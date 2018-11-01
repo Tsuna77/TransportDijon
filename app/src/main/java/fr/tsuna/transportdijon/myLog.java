@@ -41,7 +41,7 @@ public class myLog {
 	
 	public static void clear(){
 		// vidage du fichier de log
-		File f = new File(log_fullpath);
+		/*File f = new File(log_fullpath);
 		if (f.exists()){
 			f.delete();
 			try {
@@ -50,11 +50,12 @@ public class myLog {
 				debug = false;
 				write("myLog",e.getMessage());
 			}
-		}
+		}*/
 	}
 	
 	
 	public static void write(String TAG, String message, int type){
+		/*
 		// Si le mode debug est actif
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss",Locale.FRANCE);
 				String date = simpleDateFormat.format(new Date()); 
@@ -103,9 +104,10 @@ public class myLog {
 					   }
 
 				}
+				*/
 	}
 	
 	public static void write(String TAG,String message){
-		write(TAG, message, DEBUG);
+		//write(TAG, message, DEBUG);
 	}
 }
