@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
     		return;
     	}
     	diviadb.close();
-    	if ( fav_list != null & !fav_list.isEmpty()){
+    	if ( fav_list != null && !fav_list.isEmpty()){
             new Thread(new Runnable() {
                  public void run() {
                 	 List<KeolisHoraire> list_horaire;
