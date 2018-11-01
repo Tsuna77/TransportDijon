@@ -74,10 +74,20 @@ public class MainActivity extends Activity {
     		myLog.write(TAG, e.getMessage(), myLog.ERROR);
     	}
     	fav_list=diviadb.getAllFav();
-    	if (fav_list == null & starting){
+    	if (fav_list == null ){
     		// il n'y a plus de favoris, redirection vers la page de recherche
-    		startSearch();
-    		return;
+            fav_text.clear();
+            LinearLayout linearLayout =  (LinearLayout) findViewById(R.id.fav_scroll);
+            linearLayout.removeAllViews();
+            TextView msg = new TextView(this);
+            msg.setText(getString(R.string.no_fav_saved));
+            linearLayout.addView(msg);
+            // il n'y a plus de favoris, redirection vers la page de recherche
+            startSearch();
+            updating = false;
+            return;
+
+
     	}
     	diviadb.close();
     	if ( fav_list != null && !fav_list.isEmpty()){
@@ -153,8 +163,10 @@ public class MainActivity extends Activity {
 
             }).start();
 
+            update_time_UI();
             ((TextView)findViewById(R.id.textView_refresh_tim)).setText(getString(R.string.refresh_info_test, totem_refresh/1000));
     	}
+		updating = false;
     }
 	
 	@Override
