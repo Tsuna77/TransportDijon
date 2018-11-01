@@ -39,17 +39,17 @@
         <activity
             android:name="fr.tsuna.transportdijon.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar" >
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="fr.tsuna.transportdijon.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="fr.tsuna.transportdijon.MainActivity" >
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.tsuna.transportdijon.MainActivity" />
@@ -58,8 +58,8 @@
             android:name="fr.tsuna.transportdijon.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_search"
-            android:parentActivityName="fr.tsuna.transportdijon.MainActivity"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar" >
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.tsuna.transportdijon.MainActivity" />
@@ -67,7 +67,8 @@
         <activity
             android:name="fr.tsuna.transportdijon.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName="fr.tsuna.transportdijon.MainActivity" >
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.tsuna.transportdijon.MainActivity" />
@@ -82,5 +83,4 @@
 		</receiver>
 		<service android:name=".UpdateWidgetService"></service>  -->
     </application>
-
 </manifest>
