@@ -80,16 +80,16 @@ public class MainActivity extends Activity {
     		return;
     	}
     	diviadb.close();
-    	if (!fav_list.isEmpty()){
-            new Thread(new Runnable() { 
-                 public void run() { 
+    	if ( fav_list != null & !fav_list.isEmpty()){
+            new Thread(new Runnable() {
+                 public void run() {
                 	 List<KeolisHoraire> list_horaire;
                 	 fav_text.clear();
            			 TextToConsole(getString(R.string.reload));
            			try {
 						Thread.sleep(100);
 					} catch (InterruptedException e1) {
-						
+
 					}
            			fav_text.clear();
                 	 myLog.write(TAG,"Début du thread de mise à jour des horaires");
@@ -100,13 +100,13 @@ public class MainActivity extends Activity {
                 		txt.setText(getString(R.string.no_network));
                 		txt.setTextColor(getResources().getColor(R.color.white));
      					fav_text.add(txt);
-              			update_time_UI(); 
+              			update_time_UI();
               			updating=false;
               			TextToConsole("");
      					return;
           			}
-          			
-          			
+
+
                 	 for( diviaFav fav: fav_list){
 
                 		 TextView txt = new TextView(MainActivity.this);
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
                      		if (fav.getVers() != ""){
 
                      			list_horaire = new KeolisParser().parser_horaire(fav.getRefs());
-                     			
+
                  				horaire=getString(R.string.line_title);
                  				horaire=horaire.replace("%1$s", fav.getCode());
                  				horaire=horaire.replace("%2$s", fav.getNom());
@@ -131,8 +131,8 @@ public class MainActivity extends Activity {
             						horaire+="\n";
             						myLog.write(TAG, "Il n'y a qu'un seul horaire de disponible", myLog.WARNING);
             					}
-            					
-            					
+
+
                      		}
           				}catch (Exception e) {
           					horaire+=getString(R.string.no_time_available);
@@ -144,15 +144,15 @@ public class MainActivity extends Activity {
                 		registerForContextMenu(txt);
      					fav_text.add(txt);
                 	 }
-          			update_time_UI(); 
+          			update_time_UI();
           	    	handler_horaire.postDelayed(run_horaire, totem_refresh);
           			updating=false;
           			TextToConsole("");
                  }
 
-				
-            }).start(); 
-    		
+
+            }).start();
+
             ((TextView)findViewById(R.id.textView_refresh_tim)).setText(getString(R.string.refresh_info_test, totem_refresh/1000));
     	}
     }
@@ -257,7 +257,7 @@ public class MainActivity extends Activity {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		SharedPreferences.Editor editor = SP.edit();
 		editor.putString(MyDB.REFRESH_TOTEM, totem_refresh_db);
-		editor.commit();
+		editor.apply();
         //*/
         // affichage des favoris 
         if (diviabdd.asFavoris()){
