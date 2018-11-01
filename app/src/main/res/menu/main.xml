@@ -18,31 +18,32 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         android:icon="@drawable/ic_action_settings_v2"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/acton_refresh"
         android:orderInCategory="99"
         android:title="@string/nav_force_refresh_text"
         android:icon="@drawable/ic_action_update"
-        android:showAsAction="always" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_addTotem"
         android:orderInCategory="98"
         android:title="@string/action_add"
         android:icon="@drawable/ic_action_add_fav2"
-        android:showAsAction="always" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_about"
         android:orderInCategory="101"
         android:title="@string/action_about"
         android:icon="@drawable/ic_action_about"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 </menu> 
