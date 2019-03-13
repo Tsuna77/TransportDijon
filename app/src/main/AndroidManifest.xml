@@ -21,7 +21,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.tsuna.transportdijon"
-    android:versionCode="32"
+    android:versionCode="33"
     android:versionName="1.3" >
 
     <uses-permission android:name="android.permission.INTERNET" >
